@@ -1,14 +1,12 @@
-
-import pandas as pd                 # Dataframe library
+import pandas as pd  # Dataframe library
 from datetime import datetime
-import numpy as np     # Scientific computing with nD object support
+import numpy as np  # Scientific computing with nD object support
 
 # from functions import mov_ave
 # import seaborn as sns
 
 
 """________________________________________________________________________________"""
-
 
 days = [
     # "221027_Uno(COM6)",
@@ -72,15 +70,14 @@ days = [
 renameDays = days
 
 """Label list set up"""
-label = [0]*8
+label = [0] * 8
 label[0] = 'Time [s]'
 """----------------- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------------- """
 """Steps for reading data, takes one data out of #Step """
 
 step_c = 1
 length = 500
-n = 180    # Moving averaging sample size
-
+n = 180  # Moving averaging sample size
 
 for daily in range(len(days)):
 
@@ -92,6 +89,8 @@ for daily in range(len(days)):
 
     """----------------- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------------- """
     """ To select only few data from a dataframe and skip rows with Logic turned TRUE """
+
+
     def logic(index):
         if index % step_c == 0:
             return False
@@ -99,16 +98,20 @@ for daily in range(len(days)):
         #     return False
         return True
 
+
     weekdata = 'Data/' + days[daily]
     """ DataFrame read from CSV file, na_filter=False, skip_blank_lines=False """
     df = pd.read_csv('Data/Raw/' + days[daily] + ".txt", skiprows=lambda x: logic(x), sep=",")
+    print(df.columns)
+    [print(*row, sep=', ') for row in df.values.tolist()]
+    print("______________________________________________________________________")
     df_original = df.copy()
     cols = df.columns
 
     # df[df.columns[2]] = df_original[df_original.columns[1]]
     for i in range(len(df.columns)):
-        if 0<i<len(df.columns)-1:
-            df[df.columns[i+1]] = df_original[df_original.columns[i]]
+        if 0 < i < len(df.columns) - 1:
+            df[df.columns[i + 1]] = df_original[df_original.columns[i]]
 
     df.rename(columns={df.columns[0]: "Time"}, inplace=True)
     # df['Time'] = df['Time'].astype(str).str.replace('->', ',')
@@ -127,32 +130,32 @@ for daily in range(len(days)):
     # drop columns with more NaN values than the threshold
     df = df.drop(columns=nans[nans > threshold].index, axis=1)
 
-
     # df = df.apply(pd.to_numeric, errors='coerce')
 
-    df=df.dropna().reset_index(drop=True)
-
+    df = df.dropna().reset_index(drop=True)
 
     """ From time format to seconds for easier handling """
     t0 = datetime.strptime("00:00:00", "%H:%M:%S")  # Time refrence for date conversion
 
-
+    [print(*row, sep=', ') for row in df.values.tolist()];
     for i in range(df.shape[0]):
         try:
-            DT = datetime.strptime(str(df.iloc[i][0][:-5]), "%H:%M:%S")
+            try:
+                DT = datetime.strptime(str(df.iloc[i][0]), "%H:%M:%S.%f")
+            except:
+                DT = datetime.strptime(str(df.iloc[i][0][:-1]), "%H:%M:%S.%f")
         except:
             try:
-                DT = datetime.strptime(str(df.iloc[i][0]), "%H:%M:%S")
+                DT = datetime.strptime(str(df.iloc[i][0][:-1]), "%H:%M:%S")
             except:
                 try:
-                    DT = datetime.strptime(str(df.iloc[i][0]), "%Y-%m-%d %H:%M:%S.%f")
+                    DT = datetime.strptime(str(df.iloc[i][0][:-1]), "%Y-%m-%d %H:%M:%S.%f")
                 except:
-                    DT = datetime.strptime(str(df.iloc[i][0]), "%Y-%m-%d %H:%M:%S")
+                    DT = datetime.strptime(str(df.iloc[i][0][:-1]), "%Y-%m-%d %H:%M:%S")
         df.at[i, 'Time'] = (DT - t0).total_seconds()
 
-
-
     df = df.astype({' RH_HIH[%]': 'float'})
+    df = df.astype({'  T_HIH[degC]': 'float'})
 
     df = df[((df[' RH_HIH[%]']) <= 100)]
     print(df.columns)
@@ -160,7 +163,7 @@ for daily in range(len(days)):
     """________________________________________________________________________________"""
     """________________________________________________________________________________"""
 
-    df.to_excel("Data/Clean/" + str(renameDays[daily]) +".xlsx", index = False)
+    df.to_excel("Data/Clean/" + str(renameDays[daily]) + ".xlsx", index=False)
 
 
 
