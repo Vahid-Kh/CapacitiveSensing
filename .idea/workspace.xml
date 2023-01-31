@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="Just updated ReadMe.">
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230123 - COM5 - No Color.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cleanDataNTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleanDataNTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/columnPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/columnPlot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataPlot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txtToCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/txtToCSV.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +16,15 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2KXWAEMUCkWNLjDnsV0TidaoVMB" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/OneDrive - Danfoss/Desktop/# Programming Projects/RH-T Sensor" />
@@ -169,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674123318689</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Just updated ReadMe.">
+      <created>1674556349700</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674556349700</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +189,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Just updated ReadMe." />
     <option name="LAST_COMMIT_MESSAGE" value="Just updated ReadMe." />
   </component>
