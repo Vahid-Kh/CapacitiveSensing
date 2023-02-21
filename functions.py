@@ -477,6 +477,92 @@ def plot_5(time, var1, var2, var3, var4, var5, label, week):
 
 
 
+def plot_5_Scalable(time, var1, var2, var3, var4, var5, label,scale):
+
+    """
+    First plots the lines and then 'ro' spesifies red dots as the TDN states __ r ::  for red and o :: for circle
+        Color               Shape                  shape
+        b : blue            "8"	: octagon          "," : pixel
+        g : green           "s"	: square           "o" : circle
+        r : red             "p"	: pentagon         "v" : triangle_down
+        c : cyan            "P"	: plus (filled)    "x" : x
+        m : magenta         "*"	: star             "X" : x (filled)
+        y : yellow          "h"	: hexagon1         "D" : diamond
+        k : black           "H"	: hexagon2         "d" : thin_diamond
+        w : white           "+"	: plus
+    """
+
+    fig, host = plt.subplots()
+    fig.subplots_adjust(right=0.75)
+    par1 = host.twinx()
+    par2 = host.twinx()
+    par3 = host.twinx()
+    par4 = host.twinx()
+
+    """Offset the right spine of par2.  The ticks and label have already been
+     placed on the right by twinx above."""
+    par1.spines["right"].set_position(("axes", 1))
+    par2.spines["right"].set_position(("axes", 1.05))
+    par3.spines["right"].set_position(("axes", 1.10))
+    par4.spines["right"].set_position(("axes", 1.15))
+    patch_spine_invisible(par2)
+    """Second, show the right spine."""
+    par1.spines["right"].set_visible(True)
+    par2.spines["right"].set_visible(True)
+    par3.spines["right"].set_visible(True)
+    par4.spines["right"].set_visible(True)
+
+    p1, = host.plot(time, var1, "c-", label=label[1])
+    p2, = par1.plot(time, var2, "r-", label=label[2])
+    p3, = par2.plot(time, var3, "m-", label=label[3])
+    p4, = par3.plot(time, var4, "b-", label=label[4])
+    p5, = par4.plot(time, var5, "g-", label=label[5])
+
+    try:
+        host.set_xlim(min(time), max(time))
+    except:
+        time = []
+        time = list(np.array(range(len(var1)))*120)
+        host.set_xlim(min(time), max(time))
+    # span_h = max([max(var1), max(var2), max(var3), max(var4), max(var5)]) * 1.1
+    # span_l = min([min(var1), min(var2), min(var3), min(var4), min(var5)]) * 0.9
+
+
+    host.set_ylim(scale[0][0], scale[0][1])
+    par1.set_ylim(scale[1][0], scale[1][1])
+    par2.set_ylim(scale[2][0], scale[2][1])
+    par3.set_ylim(scale[3][0], scale[3][1])
+    par4.set_ylim(scale[4][0], scale[4][1])
+
+    host.set_xlabel(label[0])
+    host.set_ylabel(label[1])
+    par1.set_ylabel(label[2])
+    par2.set_ylabel(label[3])
+    par3.set_ylabel(label[4])
+    par4.set_ylabel(label[5])
+
+    host.yaxis.label.set_color(p1.get_color())
+    par1.yaxis.label.set_color(p2.get_color())
+    par2.yaxis.label.set_color(p3.get_color())
+    par3.yaxis.label.set_color(p4.get_color())
+    par4.yaxis.label.set_color(p5.get_color())
+
+    tkw = dict(size=4, width=1.5)
+    host.tick_params(axis='y', colors=p1.get_color(), **tkw)
+    par1.tick_params(axis='y', colors=p2.get_color(), **tkw)
+    par2.tick_params(axis='y', colors=p3.get_color(), **tkw)
+    par3.tick_params(axis='y', colors=p4.get_color(), **tkw)
+    par4.tick_params(axis='y', colors=p5.get_color(), **tkw)
+    host.tick_params(axis='x', **tkw)
+
+    lines = [p1, p2, p3, p4, p5]
+    plt.grid(True)
+
+    host.legend(lines, [l.get_label() for l in lines])
+    plt.title(label[1] + ', ' + label[2] + ', ' + label[3] + ', ' + label[4] + '  & ' + label[5] + ', ' + ' as a function of ' + label[0] )
+
+
+
 
 def plot_6(time, var1, var2, var3, var4, var5, var6, label, week):
 
