@@ -11,7 +11,7 @@ step = 1
 label = [0]*100
 n =200
 timeGap = 8
-sumGapLimit = 4
+sumGapLimit = 5
 
 
 """__________Functions_________"""
@@ -74,9 +74,10 @@ for daily in range(len(days)):
 
     dfRaw = pd.read_excel('Data/Clean/' + days[daily] + ".xlsx", skiprows=lambda x: logic(x))
     """ To take a portion of dataframe """
-    # df_Raw = dfRaw
-    df_Raw = dfRaw[int(len(dfRaw)*0.6):int(len(dfRaw)*0.7)]
+    df_Raw = dfRaw
+    # df_Raw = dfRaw[2000:]
     # df_Raw = dfRaw[:2000]
+    df_Raw = dfRaw[int(len(dfRaw)*0.6):int(len(dfRaw)*0.7)]
     """______________________________________ X _________________________________________"""
     # v1, label[1] = df['Temp'], 'Temp [degC] '
     v1, label[1] = df_Raw['time'], 'Time [s]'
@@ -141,25 +142,21 @@ for daily in range(len(days)):
     y=y_diff
     dx = x[1] - x[0]
     dydx = np.gradient(y, dx)
-    y= var2
+    d2ydx2 = np.gradient(dydx, dx)
+
     capturedPoints = []
-    print(y)
-    for i in range(len(y)-timeGap):
-        y_bundle = np.mean((y[i:i+timeGap]))
-        y_max = np.max((y[i:i+timeGap]))
-        y_min = np.min((y[i:i+timeGap]))
-        if y_max-y_min > 1:
+    for i in range(len(d2ydx2)-timeGap):
+        sumGap= sum(abs(d2ydx2[i:i+timeGap]))
+        if sumGap> sumGapLimit:
             print("Bubble detected @ time: ", print(time[i]))
             capturedPoints.append(i)
 
-    print()
-    plt.scatter(x, dydx, marker=',', color=(0.698, 0.847, 1.00),s=1)
+    # plt.scatter(x, dydx, marker=',', color=(0.698, 0.847, 1.00),s=1)
+    plt.scatter(x, d2ydx2, marker='*', color=(0.698, 0.847, 0.20), s=2)
     plt.scatter([var1[i] for i in capturedPoints], [var2[i] for i in capturedPoints] , marker='*', color=(0.0, 0.9, 0.9),s=3)
     plt.xlabel(label[1])
-
     plt.ylabel(label[2])
     plt.grid(c='grey', linestyle='-', linewidth=0.5, alpha=0.7)
 
-    plt.legend(leg)
 
 plt.show()

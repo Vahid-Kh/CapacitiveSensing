@@ -4,12 +4,12 @@ import numpy as np
 import random as rd
 
 
-def rec_ave(n, xold, x, x10):
-    return xold + 1 / n * (x - x10)
-
-
 def is_nan(x):
     return (x is np.nan or x != x)
+
+
+def rec_ave(n, xold, x, x10):
+    return xold + 1 / n * (x - x10)
 
 
 def mov_ave(a, n=30):
