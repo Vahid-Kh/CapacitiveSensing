@@ -131,3 +131,5 @@ for daily in range(len(days)):
                     scale)
 
 plt.show()
+
+
