@@ -30,7 +30,9 @@ days = [
     # "22",
     # "22",
     # "230106 - Liquid Detection",
-    "230123 - COM5 - No Color",
+    # "230123 - COM5 - No Color",
+    # "MSS - HIH6021 - 27-02-2023",
+    "MSS-HIH6020-28-02-2023"
 
 ]
 

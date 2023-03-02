@@ -1,0 +1,5 @@
+Find attached excel spreadsheet for capacitance sensor(HIH6020 & HIH6021) tested under following conditions.
+•	Minimal test period for each superheat condition : 7 to 15min
+•	Superheat value : 20k, 15k, 12k/10k, 8k,5k & 3/2.8K.
+•	System details: R134a <1TR system @ Ambient temperature of 25Deg C.
+•	Superheat reference mode :  Fixed speed.

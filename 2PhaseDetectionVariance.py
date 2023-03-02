@@ -3,7 +3,7 @@ import pandas as pd                 # Dataframe library
 import numpy as np                  # Scientific computing with nD object support
 import random as rd
 import math
-from functions import sct_ave_groupby,sct_df, sct,  plt, sct_fit, fit,plot_1 ,plot_2, sctFitAve, sctMVAve, plot_5_Scalable
+from functions import sct_ave_groupby,plot_5_maxed,sct_df, sct,  plt, sct_fit, fit,plot_1 ,plot_5, sctFitAve, sctMVAve, plot_5_Scalable
 from scipy.signal import butter, lfilter, freqz
 
 
@@ -19,6 +19,7 @@ def recursive_variance(data):
         variance = sum((x - mean) ** 2 for x in data) / len(data)
         # return math.sqrt(variance + recursive_variance(data[:-1]))
         return variance + recursive_variance(data[:-1])
+
 
 def mov_ave(a, n=100):
     if n > 0:
@@ -47,10 +48,6 @@ def mov_var(a, n=50):
     else:
         return a
 
-""" ___ CONSTANTS ___ """
-step = 1
-nMovAve = 200
-nVarAve = 50
 
 def logic(index):
     if index % step == 0:
@@ -58,10 +55,23 @@ def logic(index):
     return True
 
 
+""" ___ CONSTANTS ___ """
+step = 1
+nMovAve = 200
+nVarAve = 50
+lowRange = 0
+highRange = 1
+
+
+
+""" Choose data from a list of available data"""
 
 days = [
-    "230106 - Liquid Detection",
+    # "230106 - Liquid Detection",
+    "MSS - HIH6021 - 27-02-2023",
+    # "MSS-HIH6020-28-02-2023"
     ]
+
 
 for daily in range(len(days)):
     """ Color of plot """
@@ -91,12 +101,15 @@ for daily in range(len(days)):
     dfRaw = pd.read_excel('Data/Clean/' + days[daily] + ".xlsx", skiprows=lambda x: logic(x))
     """ To take a portion of dataframe """
 
-    df_Raw = dfRaw[int(len(dfRaw)*0.50):int(len(dfRaw)*0.95)]
+    df_Raw = dfRaw[int(len(dfRaw)*lowRange):int(len(dfRaw)*highRange)]
+
 
     """ Defining variables to be used """
     time = df_Raw['time'].tolist()
     Temp = np.array(df_Raw['Temp'])
     RH = np.array(df_Raw['RH%'])
+    P_Suction = np.array(df_Raw['Pressure-1'])
+
 
     """ Antioine equaation """
     AntioineA = 8.07131  # Valid for range 0 t0 100
@@ -108,12 +121,6 @@ for daily in range(len(days)):
 
     """ PLOT """
 
-    scale = [[0, 4],    # Measured Capacitance
-             [0, 4],    # Moving average Capacitance
-             [0, 0.3],  # Variance of capacitance
-             [8, 25],   # Measured temperature
-             [0, 7]]    # Variance of Tempreture
-
     label = ["Time [s]",
              "Capacitance [-]",
              "Moving average Capacitance",
@@ -121,14 +128,15 @@ for daily in range(len(days)):
              "Measured temperature [degC]",
              "Variance of Tempreture [-]"]
 
-    plot_5_Scalable(time[nMovAve:],
+
+
+    plot_5_maxed(time[nMovAve:],
                     PPartial[nMovAve:],
                     mov_ave(PPartial,nMovAve)[nMovAve:],
                     mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
                     Temp[nMovAve:],
                     mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
-                    label,
-                    scale)
+                    label, "  ")
 
 plt.show()
 
