@@ -29,10 +29,10 @@ days = [
     # "221013",
     # "22",
     # "22",
-    # "230106 - Liquid Detection",
+    "230106 - Liquid Detection",
     # "230123 - COM5 - No Color",
     # "MSS - HIH6021 - 27-02-2023",
-    "MSS-HIH6020-28-02-2023"
+    # "MSS-HIH6020-28-02-2023"
 
 ]
 
@@ -75,8 +75,8 @@ for daily in range(len(days)):
     print(df.shape)
 
     # df.drop(df.columns[0], axis=1, inplace=True)
-    for i in range(len(df)):
-        print(str(df.loc[i][0]))
+    # for i in range(len(df)):
+    #     print(str(df.loc[i][0]))
 
     """Change date format from 2019 - 08 - 01 17: 05:45.119  "%Y-%m-%d %H:%M:%S.%f "  to Seconds"""
     # t0 = datetime.strptime(df.loc[0][0], "%Y-%m-%d %H:%M:%S.%f")  # Time refrence for date conversion
@@ -117,6 +117,15 @@ for daily in range(len(days)):
                 print("Dont know what I just did here")
 
     """________________________________________________________________________________"""
+
+    df.rename(columns={
+        'time':                                                     'Time',
+        'Temp':                                                     'T_suction',
+        'RH%':                                                      'RH',
+        'Suction Pressure':                                         'P_suction',
+        'Discharge Pressure':                                       'P_discharge',
+
+    }, inplace=True)
     print(df.shape)
     print(df.head)
     df.to_excel("Data/Clean/" + str(renameDays[daily]) +".xlsx", index = False)

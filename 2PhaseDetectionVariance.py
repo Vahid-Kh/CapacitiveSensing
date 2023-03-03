@@ -105,15 +105,28 @@ for daily in range(len(days)):
 
     df_Raw = dfRaw[int(len(dfRaw)*lowRange):int(len(dfRaw)*highRange)]
 
-
+    """
+    'Time',
+    'T_suction',
+    'RH',
+    'P_suction',
+    'P_discharge',
+    'Status',
+    'SH_ref',
+    'SH',
+    'OD',
+    'S2',
+    'P_evap',
+    'P_satEvap',
+    """
     """ Defining variables to be used """
-    time = df_Raw['time'].tolist()
-    Temp = np.array(df_Raw['Temp'])
-    RH = np.array(df_Raw['RH%'])
-    P_Suction = np.array(df_Raw['Suction Pressure'])
+    time = df_Raw['Time'].tolist()
+    Temp = np.array(df_Raw['T_suction'])
+    RH = np.array(df_Raw['RH'])
+    P_Suction = np.array(df_Raw['P_suction'])
     try:
-        SH = np.array(df_Raw["Actual superheat (K)|U021|Par_Actual_Superheat"])
-        OD = np.array(df_Raw["Actual OD (%)|U024|Par_Act_OD"])
+        SH = np.array(df_Raw["SH"])
+        OD = np.array(df_Raw["OD"])
     except:
         print("No data provided for OD & SH")
     l_Temp = list(Temp)
@@ -143,10 +156,16 @@ for daily in range(len(days)):
              "Superheat [K]",
              "Actual OD [-]"
              ]
-    for i in range(len(time)):
-        if i % printInterval == 0:
-            print("#",i, " | ",TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R)),  round(Temp[i],2), " |  SH : ", round(SH[i],2))
 
+    try:
+        for i in range(len(time)):
+            if i % printInterval == 0:
+                print("#",'{:>8}'.format(i), " | SH :", '{:>5}'.format(str(round(SH[i],2))), " | ", TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R)),  round(Temp[i],2))
+
+    except:
+        for i in range(len(time)):
+            if i % printInterval == 0:
+                print("#",'{:>8}'.format(i), " | ",TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R)),  round(Temp[i],2), " |  SH : ", )
 
     try:
         plot_7_maxed(time[nMovAve:],
@@ -168,6 +187,14 @@ for daily in range(len(days)):
                         mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
                         label,
                         days[daily])
+
+    fCorr = plt.figure("CorrPlot Date " + days[daily], figsize=(19, 15))
+    plt.matshow(df_Raw.corr(), fignum=fCorr.number)
+    plt.xticks(range(df_Raw.select_dtypes(['number']).shape[1]), df_Raw.select_dtypes(['number']).columns, fontsize=10, rotation=90)
+    plt.yticks(range(df_Raw.select_dtypes(['number']).shape[1]), df_Raw.select_dtypes(['number']).columns, fontsize=14)
+    cb = plt.colorbar()
+    cb.ax.tick_params(labelsize=14)
+    plt.title('Correlation Matrix', fontsize=16);
 
 plt.show()
 
