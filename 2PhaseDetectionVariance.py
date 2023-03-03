@@ -126,6 +126,7 @@ for daily in range(len(days)):
     P_Suction = np.array(df_Raw['P_suction'])
     try:
         SH = np.array(df_Raw["SH"])
+        SH_ref = np.array(df_Raw["SH_ref"])
         OD = np.array(df_Raw["OD"])
     except:
         print("No data provided for OD & SH")
@@ -161,6 +162,7 @@ for daily in range(len(days)):
         for i in range(len(time)):
             if i % printInterval == 0:
                 print("#",'{:>8}'.format(i),
+                      " | SH_ref :", '{:>4}'.format(str(round(SH_ref[i],2))),
                       " | SH :", '{:>4}'.format(str(round(SH[i],2))),
                       " | T :", '{:>5}'.format(str(round(Temp[i],2))),
                       " | ", '{:>120}'.format(str(TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R))))
