@@ -61,7 +61,7 @@ nMovAve = 200
 nVarAve = 50
 lowRange = 0
 highRange = 1
-printInterval = 1000
+printInterval = 500
 R = "R134a"
 
 
@@ -70,8 +70,8 @@ R = "R134a"
 
 days = [
     # "230106 - Liquid Detection",
-    "MSS - HIH6021 - 27-02-2023",
-    # "MSS-HIH6020-28-02-2023"
+    # "MSS - HIH6021 - 27-02-2023",
+    "MSS-HIH6020-28-02-2023"
     ]
 
 
@@ -160,7 +160,12 @@ for daily in range(len(days)):
     try:
         for i in range(len(time)):
             if i % printInterval == 0:
-                print("#",'{:>8}'.format(i), " | SH :", '{:>5}'.format(str(round(SH[i],2))), " | ", TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R)),  round(Temp[i],2))
+                print("#",'{:>8}'.format(i),
+                      " | SH :", '{:>4}'.format(str(round(SH[i],2))),
+                      " | T :", '{:>5}'.format(str(round(Temp[i],2))),
+                      " | ", '{:>120}'.format(str(TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R))))
+                      )
+
 
     except:
         for i in range(len(time)):
