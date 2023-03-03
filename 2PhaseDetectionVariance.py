@@ -3,9 +3,9 @@ import pandas as pd                 # Dataframe library
 import numpy as np                  # Scientific computing with nD object support
 import random as rd
 import math
-from functions import sct_ave_groupby,plot_5_maxed,sct_df, sct,  plt, sct_fit, fit,plot_1 ,plot_5, sctFitAve, sctMVAve, plot_5_Scalable
+from functions import plot_5_maxed,  plt, plot_6_maxed, plot_7_maxed
 from scipy.signal import butter, lfilter, freqz
-
+from TDN import TDN, PSI
 
 def rec_ave(n, xold, x, x10):
     return xold + 1 / n * (x - x10)
@@ -61,6 +61,8 @@ nMovAve = 200
 nVarAve = 50
 lowRange = 0
 highRange = 1
+printInterval = 1000
+R = "R134a"
 
 
 
@@ -108,8 +110,19 @@ for daily in range(len(days)):
     time = df_Raw['time'].tolist()
     Temp = np.array(df_Raw['Temp'])
     RH = np.array(df_Raw['RH%'])
-    P_Suction = np.array(df_Raw['Pressure-1'])
-
+    P_Suction = np.array(df_Raw['Suction Pressure'])
+    try:
+        SH = np.array(df_Raw["Actual superheat (K)|U021|Par_Actual_Superheat"])
+        OD = np.array(df_Raw["Actual OD (%)|U024|Par_Act_OD"])
+    except:
+        print("No data provided for OD & SH")
+    l_Temp = list(Temp)
+    l_P_Suction= list(P_Suction)
+    # for i in range(len(P_Suction)):
+    #     try:
+    #         SH.append(273.15 + l_Temp[i] - PSI('T', 'Q', 0.5, 'P', l_P_Suction[i]*1e5,'R134a')-15)
+    #     except:
+    #         SH.append(0)
 
     """ Antioine equaation """
     AntioineA = 8.07131  # Valid for range 0 t0 100
@@ -123,20 +136,38 @@ for daily in range(len(days)):
 
     label = ["Time [s]",
              "Capacitance [-]",
-             "Moving average Capacitance",
-             "Variance of capacitance",
-             "Measured temperature [degC]",
-             "Variance of Tempreture [-]"]
+             "Move Ave Capacitance [-]",
+             "Variance of capacitance [-]",
+             "Measured Temp [degC]",
+             "Variance of Temp [-]",
+             "Superheat [K]",
+             "Actual OD [-]"
+             ]
+    for i in range(len(time)):
+        if i % printInterval == 0:
+            print("#",i, " | ",TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R)),  round(Temp[i],2), " |  SH : ", round(SH[i],2))
 
 
-
-    plot_5_maxed(time[nMovAve:],
-                    PPartial[nMovAve:],
-                    mov_ave(PPartial,nMovAve)[nMovAve:],
-                    mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
-                    Temp[nMovAve:],
-                    mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
-                    label, "  ")
+    try:
+        plot_7_maxed(time[nMovAve:],
+                        PPartial[nMovAve:],
+                        mov_ave(PPartial,nMovAve)[nMovAve:],
+                        mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
+                        Temp[nMovAve:],
+                        mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
+                        SH[nMovAve:],
+                        OD[nMovAve:],
+                        label,
+                        days[daily])
+    except:
+        plot_5_maxed(time[nMovAve:],
+                        PPartial[nMovAve:],
+                        mov_ave(PPartial,nMovAve)[nMovAve:],
+                        mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
+                        Temp[nMovAve:],
+                        mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
+                        label,
+                        days[daily])
 
 plt.show()
 

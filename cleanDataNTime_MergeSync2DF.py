@@ -9,30 +9,8 @@ import seaborn as sns
 
 
 days = [
-
-    # "220914",
-    # "220915",
-    # "220916",
-    # "220919",
-    # "220920",
-    # "220921",
-    # "220922",
-    # "220923",
-    # "220926",
-    # "220929",
-    # "220930",
-    # "221005",
-    # "221006",
-    # "221011",
-    # "221011_Stable",
-    # "221012",
-    # "221013",
-    # "22",
-    # "22",
-    # "230106 - Liquid Detection",
-    # "230123 - COM5 - No Color",
-    # "MSS - HIH6021 - 27-02-2023",
-    "MSS-HIH6020-28-02-2023"
+    "MSS - HIH6021 - 27-02-2023",
+    # "MSS-HIH6020-28-02-2023"
 
 ]
 
@@ -70,13 +48,13 @@ for daily in range(len(days)):
 
     weekdata = 'Data/' + days[daily]
     """ DataFrame read from CSV file, na_filter=False, skip_blank_lines=False """
-
     df = pd.read_excel('Data/Raw/' + days[daily]+ ".xlsx", skiprows=lambda x: logic(x))
+    df2 = pd.read_excel('Data/Raw/' + days[daily]+ ".xlsx", sheet_name="SH", skiprows=lambda x: logic(x))
     print(df.shape)
 
     # df.drop(df.columns[0], axis=1, inplace=True)
-    for i in range(len(df)):
-        print(str(df.loc[i][0]))
+    # for i in range(len(df)):
+    #     print(str(df.loc[i][0]))
 
     """Change date format from 2019 - 08 - 01 17: 05:45.119  "%Y-%m-%d %H:%M:%S.%f "  to Seconds"""
     # t0 = datetime.strptime(df.loc[0][0], "%Y-%m-%d %H:%M:%S.%f")  # Time refrence for date conversion
@@ -92,18 +70,70 @@ for daily in range(len(days)):
                     DT = datetime.strptime(str(df.loc[i][0]), "%Y-%m-%d %H:%M:%S.%f")
                 except:
                     DT = datetime.strptime(str(df.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+        df.at[i, 'time'] = round((DT - t0).total_seconds(), 0)
+        # print("DT", df.loc[i][0], DT, t0, round((DT - t0).total_seconds(), 0))
 
-        df.at[i, 'time'] = (DT - t0).total_seconds()
+
+    i=0
+    print(df2.loc[i][0])
+    print("00:00:00 "+str(df2.loc[i][0])[:10])
+    try:
+        t0 = datetime.strptime( str(df2.loc[i][0])[:10]+" 00:00:00", "%Y-%m-%d %H:%M:%S")  # Time refrence for date conversion
+    except:
+        try:
+            t0 = datetime.strptime(str(df2.loc[i][0])[:10] + " 00:00:00", "%Y:%m:%d %H:%M:%S")
+        except:
+            try:
+                datetime.strptime(str(df2.loc[i][0])[:10], "%H:%M:%S")
+            except:
+                t0 = datetime.strptime("00:00:00 "+str(df2.loc[i][0])[:10] , "%Y:%m:%d %H:%M:%S")
+
+
+    if days[daily] == "MSS - HIH6021 - 27-02-2023":
+        for i in range(df2.shape[0]):
+            try:
+                DT2 = datetime.strptime(str(df2.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+            except:
+                try:
+                    DT2 = datetime.strptime(str(df2.loc[i][0]), "%H:%M:%S")
+                except:
+                    try:
+                        DT2 = datetime.strptime(str(df2.loc[i][0]), "%d/%m/%Y %H.%M.%S")
+                    except:
+                        DT2 = datetime.strptime(str(df2.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+
+            print(i, i%60)
+            print(str(df2.loc[i][0]), (DT2 - t0).total_seconds() + i%60)
+            df2.at[i, 'Time'] = (DT2 - t0).total_seconds() + i%60
+            # print("DT2",df2.loc[i][0],DT2, t0, (DT2 - t0).total_seconds())
+
+    else:
+        for i in range(df2.shape[0]):
+            try:
+                DT2 = datetime.strptime(str(df2.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+            except:
+                try:
+                    DT2 = datetime.strptime(str(df2.loc[i][0]), "%H:%M:%S")
+                except:
+                    try:
+                        DT2 = datetime.strptime(str(df2.loc[i][0]), "%d/%m/%Y %H.%M.%S")
+                    except:
+                        DT2 = datetime.strptime(str(df2.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+            print(str(df2.loc[i][0]), (DT2 - t0).total_seconds())
+            df2.at[i, 'Time'] = (DT2 - t0).total_seconds()
+            # print("DT2",df2.loc[i][0],DT2, t0, (DT2 - t0).total_seconds())
 
     df = df.apply(pd.to_numeric, errors='coerce')
-
+    df2 = df2.apply(pd.to_numeric, errors='coerce')
     """DROP NAN acting only on the COLUMNS with more than 1000 nan values"""
     df = df.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
+    df2 = df2.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
     """DROP NAN acting only on the ROWS with any nan values"""
 
-
+    print(df2)
     time = df['time'].tolist()
-
+    time2 = df2['Time'].tolist()
+    df2.rename(columns={'Time': 'time'}, inplace=True)
     """________________________________________________________________________________"""
     cols = df.columns
     for j in range(10):
@@ -117,7 +147,9 @@ for daily in range(len(days)):
                 print("Dont know what I just did here")
 
     """________________________________________________________________________________"""
-    print(df.shape)
-    print(df.head)
-    df.to_excel("Data/Clean/" + str(renameDays[daily]) +".xlsx", index = False)
+
+    df_merged = pd.merge(df, df2, on='time')
+    print(df_merged.shape)
+    print(df_merged.head)
+    df_merged.to_excel("Data/Clean/" + str(renameDays[daily]) +".xlsx", index = False)
 

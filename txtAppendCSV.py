@@ -55,7 +55,7 @@ step_c = 1
 length = 500
 n = 180    # Moving averaging sample size
 
-df_multi =
+
 for daily in range(len(days)):
 
     """ To append data frames together """
