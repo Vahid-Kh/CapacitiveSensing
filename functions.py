@@ -781,10 +781,10 @@ def plot_6_maxed(time, var1, var2, var3, var4, var5, var6, label, week):
     """Offset the right spine of par2.  The ticks and label have already been
      placed on the right by twinx above."""
     par1.spines["right"].set_position(("axes", 1))
-    par2.spines["right"].set_position(("axes", 1.08))
-    par3.spines["right"].set_position(("axes", 1.16))
-    par4.spines["right"].set_position(("axes", 1.24))
-    par5.spines["right"].set_position(("axes", 1.32))
+    par2.spines["right"].set_position(("axes", 1.07))
+    par3.spines["right"].set_position(("axes", 1.14))
+    par4.spines["right"].set_position(("axes", 1.21))
+    par5.spines["right"].set_position(("axes", 1.28))
     patch_spine_invisible(par2)
     """Second, show the right spine."""
     par1.spines["right"].set_visible(True)
@@ -836,7 +836,7 @@ def plot_6_maxed(time, var1, var2, var3, var4, var5, var6, label, week):
     par2.tick_params(axis='y', colors=p3.get_color(), **tkw)
     par3.tick_params(axis='y', colors=p4.get_color(), **tkw)
     par4.tick_params(axis='y', colors=p5.get_color(), **tkw)
-    par5.tick_params(axis='y', colors=p5.get_color(), **tkw)
+    par5.tick_params(axis='y', colors=p6.get_color(), **tkw)
     host.tick_params(axis='x', **tkw)
 
     lines = [p1, p2, p3, p4, p5, p6]

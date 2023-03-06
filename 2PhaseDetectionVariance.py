@@ -130,13 +130,18 @@ for daily in range(len(days)):
         OD = np.array(df_Raw["OD"])
     except:
         print("No data provided for OD & SH")
+        SH=[]
     l_Temp = list(Temp)
     l_P_Suction= list(P_Suction)
-    # for i in range(len(P_Suction)):
-    #     try:
-    #         SH.append(273.15 + l_Temp[i] - PSI('T', 'Q', 0.5, 'P', l_P_Suction[i]*1e5,'R134a')-15)
-    #     except:
-    #         SH.append(0)
+
+    if days[daily]==  "230106 - Liquid Detection":
+        for i in range(len(P_Suction)):
+            try:
+                # print((PSI('T', 'Q', 1, 'P', l_P_Suction[i]*1e5, R)))
+                SH.append(l_Temp[i] - (PSI('T', 'Q', 1, 'P', l_P_Suction[i]*1e5+1e5, R) - 273.15))
+
+            except:
+                SH.append(0)
 
     """ Antioine equaation """
     AntioineA = 8.07131  # Valid for range 0 t0 100
@@ -172,7 +177,11 @@ for daily in range(len(days)):
     except:
         for i in range(len(time)):
             if i % printInterval == 0:
-                print("#",'{:>8}'.format(i), " | ",TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R)),  round(Temp[i],2), " |  SH : ", )
+                print("#",'{:>8}'.format(i),
+                      " | T :", '{:>5}'.format(str(round(Temp[i],2))),
+                      " | SH :", '{:>4}'.format(str(round(SH[i], 2))),
+                      " | ", '{:>120}'.format(str(TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R))))
+                      )
 
     try:
         plot_7_maxed(time[nMovAve:],
@@ -185,13 +194,37 @@ for daily in range(len(days)):
                         OD[nMovAve:],
                         label,
                         days[daily])
-    except:
+
+        """ 
+        label = ["Time [s]",
+                 "Quality sensor [-]",
+                 "Move Ave Quality sensor [-]",
+
+                 "Measured Temp [degC]",
+
+                 "Superheat [K]",
+                 "Actual OD [-]"
+                 ]
         plot_5_maxed(time[nMovAve:],
+                        PPartial[nMovAve:],
+                        mov_ave(PPartial,nMovAve)[nMovAve:],
+
+                        Temp[nMovAve:],
+
+                        SH[nMovAve:],
+                        OD[nMovAve:],
+                        label,
+                        days[daily]) 
+        """
+
+    except:
+        plot_6_maxed(time[nMovAve:],
                         PPartial[nMovAve:],
                         mov_ave(PPartial,nMovAve)[nMovAve:],
                         mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
                         Temp[nMovAve:],
                         mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
+                        SH[nMovAve:],
                         label,
                         days[daily])
 

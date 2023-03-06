@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.">
+    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2PhaseDetectionVariance.py" beforeDir="false" afterPath="$PROJECT_DIR$/2PhaseDetectionVariance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Clean/230106 - Liquid Detection.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Clean/230106 - Liquid Detection.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Clean/MSS - HIH6021 - 27-02-2023.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Clean/MSS - HIH6021 - 27-02-2023.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Clean/MSS-HIH6020-28-02-2023.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Clean/MSS-HIH6020-28-02-2023.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Raw/MSS-HIH6020-28-02-2023.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Raw/MSS-HIH6020-28-02-2023.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Archive/Plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cleanDataNTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleanDataNTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cleanDataNTime_MergeSync2DF.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleanDataNTime_MergeSync2DF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/columnPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Archive/columnPlot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corrPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Archive/corrPlot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Archive/dataPlot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +246,28 @@
       <option name="project" value="LOCAL" />
       <updated>1677833235871</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.">
+      <created>1677837042353</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1677837042353</updated>
+    </task>
+    <task id="LOCAL-00012" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)">
+      <created>1677838187527</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1677838187527</updated>
+    </task>
+    <task id="LOCAL-00013" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)">
+      <created>1677839835169</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1677839835169</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,6 +290,8 @@
     <MESSAGE value="Beautiful plots added,ranges fixed, unnecessary code remove." />
     <MESSAGE value="New data added, code flexibility &amp; scalability of plots.&#10;Functions updated." />
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved." />
-    <option name="LAST_COMMIT_MESSAGE" value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved." />
+    <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent." />
+    <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)" />
   </component>
 </project>
