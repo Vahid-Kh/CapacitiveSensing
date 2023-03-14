@@ -11,8 +11,8 @@ from TDN import TDN, PSI
 
 """ ___ CONSTANTS ___ """
 step = 1
-nMovAve = 50
-nVarAve = 25
+nMovAve = 30
+nVarAve = 10
 lowRange = 0
 highRange = 1
 printInterval = 500
@@ -21,9 +21,9 @@ R = "R134a"
 """ Choose data from a list of available data"""
 
 days = [
-    # "230106 - Liquid Detection",
-    # "MSS - HIH6021 - 27-02-2023",
-    # "MSS-HIH6020-28-02-2023",
+    "230106 - Liquid Detection",
+    "MSS - HIH6021 - 27-02-2023",
+    "MSS-HIH6020-28-02-2023",
     "SH-v1-10-03-2023"
     ]
 
