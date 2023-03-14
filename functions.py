@@ -230,7 +230,7 @@ def plot_2_maxed(time, var1, var2, label, week):
     fig.subplots_adjust(right=0.75)
     fig.canvas.set_window_title(str(week))
     par1 = host.twinx()
-    par2 = host.twinx()
+
 
 
     """Offset the right spine of par2.  The ticks and label have already been
@@ -239,7 +239,6 @@ def plot_2_maxed(time, var1, var2, label, week):
 
 
 
-    patch_spine_invisible(par2)
     """Second, show the right spine."""
     par1.spines["right"].set_visible(True)
 
@@ -275,8 +274,6 @@ def plot_2_maxed(time, var1, var2, label, week):
     tkw = dict(size=4, width=1.5)
     host.tick_params(axis='y', colors=p1.get_color(), **tkw)
     par1.tick_params(axis='y', colors=p2.get_color(), **tkw)
-
-
     host.tick_params(axis='x', **tkw)
 
     lines = [p1, p2]

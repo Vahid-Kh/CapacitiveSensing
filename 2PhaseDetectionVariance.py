@@ -21,9 +21,9 @@ R = "R134a"
 """ Choose data from a list of available data"""
 
 days = [
-    "230106 - Liquid Detection",
-    "MSS - HIH6021 - 27-02-2023",
-    "MSS-HIH6020-28-02-2023",
+    # "230106 - Liquid Detection",
+    # "MSS - HIH6021 - 27-02-2023",
+    # "MSS-HIH6020-28-02-2023",
     "SH-v1-10-03-2023"
     ]
 
@@ -165,6 +165,12 @@ for daily in range(len(days)):
                      label,
                      days[daily])
 
+        plot_2_maxed(time[nMovAve:][300:],
+                     mov_ave(var_ave_PPartial, 300)[300:],
+                     mov_ave(var_ave_Temp, 300)[300:],
+                     label,
+                     days[daily])
+
 
         """  
         label = ["Time [s]",
@@ -275,6 +281,14 @@ for daily in range(len(days)):
                      var_ave_Temp,
                      label,
                      days[daily])
+
+        plot_2_maxed(time[nMovAve:][300:],
+                     mov_ave(var_ave_PPartial, 300)[300:],
+                     mov_ave(var_ave_Temp, 300)[300:],
+                     label,
+                     days[daily])
+
+
 
     fCorr = plt.figure("CorrPlot Date " + days[daily], figsize=(19, 15))
     plt.matshow(df_Raw.corr(), fignum=fCorr.number)
