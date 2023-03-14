@@ -12,16 +12,39 @@ def rec_ave(n, xold, x, x10):
     return xold + 1 / n * (x - x10)
 
 
-def mov_ave(a, n=30):
-    if n>0:
-        mlt_mov_ave = a[0:n]
-        x_old = sum(mlt_mov_ave) / n
+
+def mov_ave(a, n=100):
+    if n > 0:
+        list_mov_ave = a[0:n]
+        x_old = sum(list_mov_ave) / n
         for i in range(n, len(a)):
             x_new = rec_ave(n, x_old, a[i], a[i - n])
-            mlt_mov_ave.append(x_new)
+            list_mov_ave.append(x_new)
             x_old = x_new
+        return list_mov_ave
+    else:
+        return a
 
-        return mlt_mov_ave
+
+def recursive_variance(data):
+    if len(data) == 1:
+        return 0
+    else:
+        mean = sum(data) / len(data)
+        variance = sum((x - mean) ** 2 for x in data) / len(data)
+        # return math.sqrt(variance + recursive_variance(data[:-1]))
+        return variance + recursive_variance(data[:-1])
+
+
+def mov_var(a, n=50):
+    if n > 0:
+        list_var = a[0:n]
+        var_old = 0
+        for i in range(n, len(a)):
+            var_new = recursive_variance(a[i - n:i])
+            list_var.append(var_new)
+            var_old = var_new
+        return list_var
     else:
         return a
 
@@ -56,7 +79,6 @@ def print_lengly_ave(vd, eb, bitzer, direct, dd,step, length=360):
                   round(sum(direct[ii:i]) / di, 3), ' ',
                   round(sum(dd[ii:i]) / di, 3)
                   )
-
         except:
             print('devision by zero')
 
@@ -128,7 +150,7 @@ def plot_1(time, var1, label, week):
     host.legend(lines, [l.get_label() for l in lines])
     plt.title(label[1] + ' and ' +   label[2] + ' as a function of ' + label[0] + ' week ' + str(week))
 
-def plot_2(time, var1, var2, label, week):
+def plot_2(time: object, var1: object, var2: object, label: object, week: object) -> object:
 
     """
     First plots the lines and then 'ro' spesifies red dots as the TDN states __ r ::  for red and o :: for circle
@@ -188,6 +210,80 @@ def plot_2(time, var1, var2, label, week):
     host.legend(lines, [l.get_label() for l in lines])
     plt.title(label[1] + ' and ' +   label[2] + ' as a function of ' + label[0] + ' week ' + str(week))
 
+
+def plot_2_maxed(time, var1, var2, label, week):
+
+    """
+    First plots the lines and then 'ro' spesifies red dots as the TDN states __ r ::  for red and o :: for circle
+        Color               Shape                  shape
+        b : blue            "8"	: octagon          "," : pixel
+        g : green           "s"	: square           "o" : circle
+        r : red             "p"	: pentagon         "v" : triangle_down
+        c : cyan            "P"	: plus (filled)    "x" : x
+        m : magenta         "*"	: star             "X" : x (filled)
+        y : yellow          "h"	: hexagon1         "D" : diamond
+        k : black           "H"	: hexagon2         "d" : thin_diamond
+        w : white           "+"	: plus
+    """
+
+    fig, host = plt.subplots()
+    fig.subplots_adjust(right=0.75)
+    fig.canvas.set_window_title(str(week))
+    par1 = host.twinx()
+    par2 = host.twinx()
+
+
+    """Offset the right spine of par2.  The ticks and label have already been
+     placed on the right by twinx above."""
+    par1.spines["right"].set_position(("axes", 1))
+
+
+
+    patch_spine_invisible(par2)
+    """Second, show the right spine."""
+    par1.spines["right"].set_visible(True)
+
+
+
+
+    p1, = host.plot(time, var1, "c-", label=label[1])
+    p2, = par1.plot(time, var2, "r-", label=label[2])
+
+
+    try:
+        host.set_xlim(min(time), max(time))
+    except:
+        time = []
+        time = list(np.array(range(len(var1)))*120)
+        host.set_xlim(min(time), max(time))
+
+
+    host.set_ylim(min(var1), max(var1))
+    par1.set_ylim(min(var2), max(var2))
+
+
+    host.set_xlabel(label[0])
+    host.set_ylabel(label[1])
+    par1.set_ylabel(label[2])
+
+
+    host.yaxis.label.set_color(p1.get_color())
+    par1.yaxis.label.set_color(p2.get_color())
+
+
+
+    tkw = dict(size=4, width=1.5)
+    host.tick_params(axis='y', colors=p1.get_color(), **tkw)
+    par1.tick_params(axis='y', colors=p2.get_color(), **tkw)
+
+
+    host.tick_params(axis='x', **tkw)
+
+    lines = [p1, p2]
+    plt.grid(True)
+
+    host.legend(lines, [l.get_label() for l in lines])
+    # plt.title(label[1] + ', ' + label[2] + ', ' + label[3] + ', ' + label[4] + '  & ' + label[5] + ', ' + ' as a function of ' + label[0] + ' for week ' + str(week))
 
 
 def plot_2_ax(time, var1, var2, label, week):
@@ -396,6 +492,88 @@ def plot_4(time, var1, var2, var3, var4, label, week):
     plt.title(label[1] + ', ' + label[2] + ', ' + label[3] + ' & ' + label[4] + ', ' + ' as a function of ' + label[0] + ' for week ' + str(week))
 
 
+def plot_4_maxed(time, var1, var2, var3, var4, label, week):
+
+    """
+    First plots the lines and then 'ro' spesifies red dots as the TDN states __ r ::  for red and o :: for circle
+        Color               Shape                  shape
+        b : blue            "8"	: octagon          "," : pixel
+        g : green           "s"	: square           "o" : circle
+        r : red             "p"	: pentagon         "v" : triangle_down
+        c : cyan            "P"	: plus (filled)    "x" : x
+        m : magenta         "*"	: star             "X" : x (filled)
+        y : yellow          "h"	: hexagon1         "D" : diamond
+        k : black           "H"	: hexagon2         "d" : thin_diamond
+        w : white           "+"	: plus
+    """
+
+    fig, host = plt.subplots()
+    fig.subplots_adjust(right=0.75)
+    fig.canvas.set_window_title(str(week))
+    par1 = host.twinx()
+    par2 = host.twinx()
+    par3 = host.twinx()
+    par4 = host.twinx()
+
+    """Offset the right spine of par2.  The ticks and label have already been
+     placed on the right by twinx above."""
+    par1.spines["right"].set_position(("axes", 1))
+    par2.spines["right"].set_position(("axes", 1.07))
+    par3.spines["right"].set_position(("axes", 1.14))
+
+    patch_spine_invisible(par2)
+    """Second, show the right spine."""
+    par1.spines["right"].set_visible(True)
+    par2.spines["right"].set_visible(True)
+    par3.spines["right"].set_visible(True)
+
+
+    p1, = host.plot(time, var1, "c-", label=label[1])
+    p2, = par1.plot(time, var2, "r-", label=label[2])
+    p3, = par2.plot(time, var3, "m-", label=label[3])
+    p4, = par3.plot(time, var4, "b-", label=label[4])
+
+
+    try:
+        host.set_xlim(min(time), max(time))
+    except:
+        time = []
+        time = list(np.array(range(len(var1)))*120)
+        host.set_xlim(min(time), max(time))
+
+
+    host.set_ylim(min(var1), max(var1))
+    par1.set_ylim(min(var2), max(var2))
+    par2.set_ylim(min(var3), max(var3))
+    par3.set_ylim(min(var4), max(var4))
+
+    host.set_xlabel(label[0])
+    host.set_ylabel(label[1])
+    par1.set_ylabel(label[2])
+    par2.set_ylabel(label[3])
+    par3.set_ylabel(label[4])
+
+    host.yaxis.label.set_color(p1.get_color())
+    par1.yaxis.label.set_color(p2.get_color())
+    par2.yaxis.label.set_color(p3.get_color())
+    par3.yaxis.label.set_color(p4.get_color())
+
+
+    tkw = dict(size=4, width=1.5)
+    host.tick_params(axis='y', colors=p1.get_color(), **tkw)
+    par1.tick_params(axis='y', colors=p2.get_color(), **tkw)
+    par2.tick_params(axis='y', colors=p3.get_color(), **tkw)
+    par3.tick_params(axis='y', colors=p4.get_color(), **tkw)
+
+    host.tick_params(axis='x', **tkw)
+
+    lines = [p1, p2, p3, p4]
+    plt.grid(True)
+
+    host.legend(lines, [l.get_label() for l in lines])
+    # plt.title(label[1] + ', ' + label[2] + ', ' + label[3] + ', ' + label[4] + '  & ' + label[5] + ', ' + ' as a function of ' + label[0] + ' for week ' + str(week))
+
+
 
 def plot_5(time, var1, var2, var3, var4, var5, label, week):
 
@@ -423,9 +601,9 @@ def plot_5(time, var1, var2, var3, var4, var5, label, week):
     """Offset the right spine of par2.  The ticks and label have already been
      placed on the right by twinx above."""
     par1.spines["right"].set_position(("axes", 1))
-    par2.spines["right"].set_position(("axes", 1.08))
-    par3.spines["right"].set_position(("axes", 1.16))
-    par4.spines["right"].set_position(("axes", 1.24))
+    par2.spines["right"].set_position(("axes", 1.07))
+    par3.spines["right"].set_position(("axes", 1.14))
+    par4.spines["right"].set_position(("axes", 1.21))
     patch_spine_invisible(par2)
     """Second, show the right spine."""
     par1.spines["right"].set_visible(True)
@@ -508,9 +686,9 @@ def plot_5_maxed(time, var1, var2, var3, var4, var5, label, week):
     """Offset the right spine of par2.  The ticks and label have already been
      placed on the right by twinx above."""
     par1.spines["right"].set_position(("axes", 1))
-    par2.spines["right"].set_position(("axes", 1.08))
-    par3.spines["right"].set_position(("axes", 1.16))
-    par4.spines["right"].set_position(("axes", 1.24))
+    par2.spines["right"].set_position(("axes", 1.07))
+    par3.spines["right"].set_position(("axes", 1.14))
+    par4.spines["right"].set_position(("axes", 1.21))
     patch_spine_invisible(par2)
     """Second, show the right spine."""
     par1.spines["right"].set_visible(True)
@@ -592,9 +770,9 @@ def plot_5_Scalable(time, var1, var2, var3, var4, var5, label,scale):
     """Offset the right spine of par2.  The ticks and label have already been
      placed on the right by twinx above."""
     par1.spines["right"].set_position(("axes", 1))
-    par2.spines["right"].set_position(("axes", 1.05))
-    par3.spines["right"].set_position(("axes", 1.10))
-    par4.spines["right"].set_position(("axes", 1.15))
+    par2.spines["right"].set_position(("axes", 1.07))
+    par3.spines["right"].set_position(("axes", 1.14))
+    par4.spines["right"].set_position(("axes", 1.21))
     patch_spine_invisible(par2)
     """Second, show the right spine."""
     par1.spines["right"].set_visible(True)
@@ -689,10 +867,10 @@ def plot_6(time, var1, var2, var3, var4, var5, var6, label, week):
     """Offset the right spine of par2.  The ticks and label have already been
      placed on the right by twinx above."""
     par1.spines["right"].set_position(("axes", 1))
-    par2.spines["right"].set_position(("axes", 1.08))
-    par3.spines["right"].set_position(("axes", 1.16))
-    par4.spines["right"].set_position(("axes", 1.24))
-    par5.spines["right"].set_position(("axes", 1.32))
+    par2.spines["right"].set_position(("axes", 1.07))
+    par3.spines["right"].set_position(("axes", 1.14))
+    par4.spines["right"].set_position(("axes", 1.21))
+    par5.spines["right"].set_position(("axes", 1.28))
     patch_spine_invisible(par2)
     """Second, show the right spine."""
     par1.spines["right"].set_visible(True)

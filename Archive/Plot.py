@@ -3,7 +3,7 @@
 import pandas as pd                 # Dataframe library
 import numpy as np                  # Scientific computing with nD object support
 from functions import sct_ave_groupby,sct_df, mov_ave, plt, sct_fit, fit,plot_1 ,plot_2, sctFitAve, sctMVAve
-
+import random as rd
 
 
 """________________________________________________________________________________"""
@@ -84,8 +84,8 @@ days = [
     # "221119-21 - Defrost - COM7 - DTI Ammonia",
     # "221122 - Defrost - COM6 - DTI Ammonia",
     # "221122 - Defrost - COM7 - DTI Ammonia",
-    "230123 - COM5 - No Color",
-    # "",
+    # "230123 - COM5 - No Color",
+    # "230123 - COM5 - No Color.xlsx",
     # "",
     # "",
     # "",
@@ -120,14 +120,22 @@ cNum = list(range(100))
 
 listCurveFitX = []
 listCurveFitY = []
-
+l_Col = [(1, 0, 0), (0, 0.9, 1), (0.6, 0.2, 0.8), (1, 0, 1), (0.4, 1, 0), (0, 0.2, 1), (1, 1, 0), (0, 0, 0)]
 for daily in range(len(days)):
+
+    """ Color of plot """
+    if daily < 8:
+        col = l_Col[daily]
+    else:
+        col = (rd.random(), rd.random(), rd.random())
+
     """     Random colors    """
     # col = (
     #         rd.random(),
     #         rd.random(),
     #         rd.random()
     #         )
+
 
     """     Danfoss colors   """
     # if pdm == 0:
@@ -147,23 +155,7 @@ for daily in range(len(days)):
     # if pdm == 7:
     #     col = (1, 0.9, 0.9)
 
-    """     Visible colors   """
-    if daily == 0:
-        col = (1, 0, 0)
-    if daily == 1:
-        col = (0, 0.9, 1)
-    if daily == 2:
-        col = (0.6, 0.2, 0.8)
-    if daily == 3:
-        col = (1, 0, 1)
-    if daily == 4:
-        col = (0.4, 1, 0)
-    if daily == 5:
-        col = (0, 0.2, 1)
-    if daily == 6:
-        col = (1, 1, 0)
-    if daily == 7:
-        col = (0, 0, 0)
+
 
     df = pd.read_excel('Data/Clean/' + days[daily]+ ".xlsx", skiprows=lambda x: logic(x))
     """ To take a portion of dataframe """
