@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added">
+    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added">
+      <change afterPath="$PROJECT_DIR$/2PhaseDetectionVarianceT_Evap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Clean/221011.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Clean/221011_Stable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Clean/230323.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Raw/221011.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Raw/221011_Stable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Raw/230323.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Raw/SH-24-03-2023.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2PhaseDetectionVariance.py" beforeDir="false" afterPath="$PROJECT_DIR$/2PhaseDetectionVariance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cleanDataNTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleanDataNTime.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,13 +53,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GPT" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Data/Raw" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\U375297\Git\Python\CapacitiveSensing" />
       <recent name="C:\Users\U375297\Git\Python\CapacitiveSensing\Data\Raw" />
+      <recent name="C:\Users\U375297\Git\Python\CapacitiveSensing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\U375297\Git\Python\CapacitiveSensing\Archive" />
@@ -57,6 +67,24 @@
   </component>
   <component name="RunManager" selected="Python.2PhaseDetectionVariance">
     <configuration name="2PhaseDetectionVariance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CapacitiveSensing" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2PhaseDetectionVariance.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="2PhaseDetectionVarianceT_Evap" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CapacitiveSensing" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -68,7 +96,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2PhaseDetectionVariance.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2PhaseDetectionVarianceT_Evap.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -90,27 +118,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Archive/Plot.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Plot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="CapacitiveSensing" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\U375297\Git\Python\CapacitiveSensing\Archive\Plot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,10 +171,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.2PhaseDetectionVariance" />
+        <item itemvalue="Python.cleanDataNTime" />
+        <item itemvalue="Python.2PhaseDetectionVarianceT_Evap" />
         <item itemvalue="Python.Plot (1)" />
         <item itemvalue="Python.cleanDataNTime_MergeSync2DF" />
-        <item itemvalue="Python.cleanDataNTime" />
-        <item itemvalue="Python.Plot" />
       </list>
     </recent_temporary>
   </component>
@@ -292,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678795701274</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added">
+      <created>1678795833982</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1678795833982</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,7 +332,8 @@
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent." />
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)" />
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added" />
-    <option name="LAST_COMMIT_MESSAGE" value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Corrolation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added" />
+    <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added" />
+    <option name="LAST_COMMIT_MESSAGE" value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
