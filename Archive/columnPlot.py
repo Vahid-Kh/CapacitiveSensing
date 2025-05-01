@@ -83,8 +83,8 @@ days = [
     # "221119-21 - Defrost - COM7 - DTI Ammonia",
     # "221122 - Defrost - COM6 - DTI Ammonia",
     # "221122 - Defrost - COM7 - DTI Ammonia",
-    "230123 - COM5 - No Color",
-    # "",
+    # # "",
+
     # "",
     # "",
     # "",

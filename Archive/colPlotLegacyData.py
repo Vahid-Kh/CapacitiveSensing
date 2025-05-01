@@ -12,6 +12,9 @@ from functions import sct_ave_groupby,sct_df, mov_ave, plt, sct_fit, fit,plot_1 
 """Label list set up"""
 label = [0]*100
 step = 1
+# plotStyle= "-" # Plots as continoius line
+plotStyle= "." # Plots as medium sized dots
+# plotStyle= "," # Plots as tiny sized dots
 
 
 """________________________________________________________________________________"""
@@ -30,7 +33,7 @@ days = [
     # "220915",
     # "220916",
     # "220919",
-    # "220920",
+    "220920",
     # "220921",
     # "220922",
     # "220923",
@@ -51,55 +54,12 @@ days = [
     # "22101",
     # "22101",
     # "22101",
-    # "221201 - 3 to 4.5 SH",
-    "230131 - COM5 - Orange"
     ]
-""" Those with constant PPM"""
-# days = [
-#
-#     # "220915",
-#     # "220916",
-#     # "220919",
-#     # "220920",
-#     # "220921",
-#     # "220922",
-#     "220923",
-#     "220926",
-#     "220929",
-#     # "220930",
-#     "2209301",
-#     "2209302",
-#     # "2209303",
-#     # "2209304",
-#     # "2209305",
-#     # "221005",
-#     # "221006",
-#     # "221011_Stable",
-#     ]
 
-""" All days  """
-# days = [
-#
-#     "220915",
-#     "220916",
-#     "220919",
-#     "220920",
-#     "220921",
-#     "220922",
-#     "220923",
-#     "220926",
-#     "220929",
-#     # "220930",
-#     "2209301",
-#     "2209302",
-#     "2209303",
-#     # "2209304",
-#     "2209305",
-#     "221005",
-#     "221006",]
 
 listCurveFitX = []
 listCurveFitY = []
+cNum = list(range(100))
 for daily in range(len(days)):
     """     Random colors    """
     # col = (
@@ -144,9 +104,9 @@ for daily in range(len(days)):
     if daily == 7:
         col = (0, 0, 0)
 
-    df = pd.read_excel('Data/Clean/' + days[daily]+ ".xlsx", skiprows=lambda x: logic(x))
+    df = pd.read_excel('Data/Raw/' + days[daily]+ ".xlsx", skiprows=lambda x: logic(x))
     """ To take a portion of dataframe """
-    # df = df[2000:]
+    df = df[150:1000]
 
     """___________________________________________________________________________________________________________
     ____________________________________________________PLOTS_____________________________________________________
@@ -168,97 +128,51 @@ for daily in range(len(days)):
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  PERFORMANCE PLOTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     ___________________________________________________________________________________________________________"""
 
-
-
-
-    """To fix the legend"""
-    legend = 18
-    wt = " "
-    leg = []
-
-    weeklist = " "
-    lpdm = len(days)
-    for i in range(lpdm):
-        leg.append(days[i][:legend] + "Scatter data")
-        leg.append(days[i][:legend] + "Average weekly line")
-        leg.append(days[i][:legend] + "Grouped average based on X axis")
-    """__________________________________________________________________________________"""
-
-
-    n_ave = 1
-    po = 2
-    relHumidRaw = [(np.poly1d(np.polyfit(df['Temp'], df['RH%'], po))(np.unique([24]))).tolist()[0]]*len(df['Temp'])
-    relHumidTrue = df['RH%'].copy()
-    ratioRelHumidRawToTrue = (np.array(relHumidRaw)/np.array(relHumidTrue)).tolist()
-
     """______________________________________ X _________________________________________"""
-    tempreture, label[1] = df['Temp'], 'Temp [degC] '
-    # v1, label[1] = df['time'], 'Time [s]'
-    # v1, label[1] = df[''], ''
-    # v1, label[1] = df[''], ''
-    # v1, label[1] = df[''], ''
+    var1, label[1] = df[df.columns[cNum[0]]], df.columns[cNum[0]]
     """______________________________________ Y _________________________________________"""
 
-    ratioRelHumidRawToTrue, label[2] = ratioRelHumidRawToTrue, 'RH_Raw / RH_True @ 24degC ref.'
-    # v2, label[2] = df['Temp'], 'Temp [degC] '
-    # v2, label[2] = df[],
-    # v2, label[2] = df[],
-    z = np.polyfit(tempreture, ratioRelHumidRawToTrue, 1)
-
-
-
-    dict_dff = {
-        label[1]: tempreture,
-        label[2]: ratioRelHumidRawToTrue,
-        }
-
-    dfRel = pd.DataFrame(dict_dff)
-    plt.figure(str(str(label[1]) + " vs, " +  str(label[2]) + " for " + str(weeklist )))
-    sct_ave_groupby(dfRel, po, col, label)
-    plt.legend(leg)
-    print("RH_Raw / RH_True vs. Temperature - 24degC as refrence", z , "for ", days[daily])
-    listCurveFitX.append(z[0])
-    listCurveFitY.append(z[1])
-
-    """______________________________________ X _________________________________________"""
-    # v1, label[1] = df['Temp'], 'Temp [degC] '
-    v1, label[1] = df['time'], 'Time [s]'
-    # v1, label[1] = df[''], ''
-    # v1, label[1] = df[''], ''
-    # v1, label[1] = df[''], ''
-    """______________________________________ Y _________________________________________"""
-
-
-    v2, label[2] = df['RH%'], 'RH%'
-    # v2, label[2] = df['Temp'], 'Temp [degC] '
-    # v2, label[2] = df[],
-    # v2, label[2] = df[],
-
-
-    """_________________________________ var1, var2 ______________________________________"""
-    time = df['time'].tolist()
-    var1 = v1.tolist()
-    var2 = v2.tolist()
-
+    var2, label[2] = df[df.columns[cNum[1]]], df.columns[cNum[1]]
 
     dict_dff = {
         label[1]: var1,
         label[2]: var2,
         }
-    dff = pd.DataFrame(dict_dff)
 
-    print("  Average of  ", days[daily][:3], sum(dff[label[2]]) / (len(dff[label[2]])))
-    plt.figure(str(str(label[1]) + " vs, " +  str(label[2]) + " for " + str(weeklist )))
-    sct_ave_groupby(dff, po, col, label)
-    plt.legend(leg)
+    dfRel = pd.DataFrame(dict_dff)
+    """ Old print method using Matplotlib, could not fix the time ticker interval """
+    # plt.figure(str(str(label[1]) + " vs, " +  str(label[2]) + " for " + str(weeklist )))
+    # plt.scatter(var1,var2,c=col, marker=",", s=1)
+    # plt.tick_params(axis='x', labelsize=10, rotation=60)
+    # sct_ave_groupby(dfRel, po, col, label)
+    # plt.legend(leg)
 
 
-print(np.average(listCurveFitX), np.average(listCurveFitY))
+    # convert the time_tag column to a datetime dtype
+    # df.time_tag = pd.to_datetime(df["Time"])
+    print(df)
 
+    # set the time_tag column as the index
+    df.set_index('Time', inplace=True)
+
+    # plot the dataframe
+    """ To overplot data """
+    #Rename the column not to creat confusion which is which
+    df.rename(columns={df.columns[cNum[0]]: df.columns[cNum[0]]+"  "+days[daily]}, inplace=True)
+
+    if daily == 0:
+        ax = df[[df.columns[cNum[0]]]].plot(style=plotStyle, fontsize=12)
+
+    else:
+        df[[df.columns[cNum[0]]]].plot(ax=ax, style=plotStyle, fontsize=12)
+
+""" DF PLOT LIB: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html """
 plt.show()
 
 
 
 
 
+
+19.53
 
