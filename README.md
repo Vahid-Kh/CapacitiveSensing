@@ -1,2 +1,2 @@
 # CapacitiveSensing
-The code for Danfoss Refrigerant Heartbeat
+The code for analysing capacitive-type sensor data.
