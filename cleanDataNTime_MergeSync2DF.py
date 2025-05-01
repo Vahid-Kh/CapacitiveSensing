@@ -9,7 +9,8 @@ import seaborn as sns
 days = [
     # "MSS - HIH6021 - 27-02-2023",
     # "MSS-HIH6020-28-02-2023",
-    "SH-v1-10-03-2023"
+    # "SH-v1-10-03-2023",
+    "SH-03-04-2023"
 
 ]
 
@@ -24,6 +25,7 @@ label[0] = 'Time [s]'
 step_c = 1
 length = 500
 n = 180  # Moving averaging sample size
+printInterval =1000
 
 for daily in range(len(days)):
 
@@ -47,7 +49,12 @@ for daily in range(len(days)):
     """ DataFrame read from CSV file, na_filter=False, skip_blank_lines=False """
     df = pd.read_excel('Data/Raw/' + days[daily] + ".xlsx", sheet_name=days[daily], skiprows=lambda x: logic(x))
     df2 = pd.read_excel('Data/Raw/' + days[daily] + ".xlsx", sheet_name="SH", skiprows=lambda x: logic(x))
-    print("Shape of first tab : ", df.shape, "Shape of second tab : ", df2.shape)
+    print("File name: ", days[daily], "Shape of first tab : ", df.shape, "Shape of second tab : ", df2.shape)
+
+    """DROP NAN acting only on the COLUMNS with more than 1000 nan values"""
+    df = df.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
+    df2 = df2.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
+    """DROP NAN acting only on the ROWS with any nan values"""
 
     # df.drop(df.columns[0], axis=1, inplace=True)
     # for i in range(len(df)):
@@ -71,8 +78,10 @@ for daily in range(len(days)):
             try:
                 datetime.strptime(str(df.loc[i][0])[:10], "%H:%M:%S")
             except:
-                t0 = datetime.strptime("00:00:00 " + str(df.loc[i][0])[:10], "%Y:%m:%d %H:%M:%S")
-
+                try:
+                    t0 = datetime.strptime("00:00:00 " + str(df.loc[i][0])[:10], "%Y:%m:%d %H:%M:%S")
+                except:
+                    t0 = datetime.strptime( str(df.loc[i][0])[:-7], "%H:%M:%S")
     for i in range(df.shape[0]):
         try:
             DT = datetime.strptime(str(df.loc[i][0]), "%H:%M:%S.%f")
@@ -85,7 +94,8 @@ for daily in range(len(days)):
                 except:
                     DT = datetime.strptime(str(df.loc[i][0]), "%Y-%m-%d %H:%M:%S")
         df.at[i, 'time'] = round((DT - t0).total_seconds(), 0)
-        print("DT", df.loc[i][0], DT, t0, round((DT - t0).total_seconds(), 0))
+        if i % printInterval == 0:
+            print("DT",  i % printInterval ,  df.loc[i][0], DT, t0, round((DT - t0).total_seconds(), 0))
 
     i = 0
     # print(df2.loc[i][0])
@@ -100,8 +110,10 @@ for daily in range(len(days)):
             try:
                 datetime.strptime(str(df2.loc[i][0])[:10], "%H:%M:%S")
             except:
-                t0 = datetime.strptime("00:00:00 " + str(df2.loc[i][0])[:10], "%Y:%m:%d %H:%M:%S")
-
+                try:
+                    t0 = datetime.strptime("00:00:00 " + str(df2.loc[i][0])[:10], "%Y:%m:%d %H:%M:%S")
+                except:
+                    t0 = datetime.strptime(str(df2.loc[i][0])[:-3], "%m/%d/%Y %H:%M:%S")
     if (days[daily] == "MSS - HIH6021 - 27-02-2023") or (days[daily] == "SH-v1-10-03-2023"):
         for i in range(df2.shape[0]):
             try:
@@ -118,7 +130,10 @@ for daily in range(len(days)):
             # print(i, i%60)
             # print(str(df2.loc[i][0]), (DT2 - t0).total_seconds() + i%60)
             df2.at[i, 'Time'] = (DT2 - t0).total_seconds() + i % 60
-            print("DT2", df2.loc[i][0], DT2, t0, (DT2 - t0).total_seconds())
+            if i % printInterval == 0:
+                if i  == 0:
+                    print("IF CLAUSE HAPPENED!!")
+                print("DT2", i % printInterval, df2.loc[i][0], DT2, t0, (DT2 - t0).total_seconds())
 
     else:
         for i in range(df2.shape[0]):
@@ -131,19 +146,20 @@ for daily in range(len(days)):
                     try:
                         DT2 = datetime.strptime(str(df2.loc[i][0]), "%d/%m/%Y %H.%M.%S")
                     except:
-                        DT2 = datetime.strptime(str(df2.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+                        try:
+                            DT2 = datetime.strptime(str(df2.loc[i][0]), "%Y-%m-%d %H:%M:%S")
+                        except:
+                            DT2 = datetime.strptime(str(df2.loc[i][0]), "%m/%d/%Y %I:%M:%S %p")
             # print(str(df2.loc[i][0]), (DT2 - t0).total_seconds())
             df2.at[i, 'Time'] = (DT2 - t0).total_seconds()
-            print("DT2", df2.loc[i][0], DT2, t0, (DT2 - t0).total_seconds())
+            if i % printInterval == 0:
+                if i == 0:
+                     print("ELSE HAPPENED!!")
+                print("DT2", i % printInterval, df2.loc[i][0], DT2, t0, (DT2 - t0).total_seconds())
 
     df = df.apply(pd.to_numeric, errors='coerce')
 
     df2 = df2.apply(pd.to_numeric, errors='coerce')
-
-    """DROP NAN acting only on the COLUMNS with more than 1000 nan values"""
-    df = df.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
-    df2 = df2.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
-    """DROP NAN acting only on the ROWS with any nan values"""
 
     time = df['time'].tolist()
     time2 = df2['Time'].tolist()
@@ -180,7 +196,7 @@ for daily in range(len(days)):
     }, inplace=True)
     print("Shape of merged dataframes : ", df_merged.shape)
     print(df_merged.head)
-    df_merged = df_merged[df_merged['T_suction'].notna()]
-    df_merged = df_merged[df_merged['OD'].notna()]
 
+
+    df_merged = df_merged[df_merged["P_suction"].notna()]
     df_merged.to_excel("Data/Clean/" + str(renameDays[daily]) + ".xlsx", index=False)

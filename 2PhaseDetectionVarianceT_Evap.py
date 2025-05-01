@@ -15,6 +15,7 @@ nMovAve = 30
 nVarAve = 10
 lowRange = 0
 highRange = 1
+varnum = 500
 printInterval = 500
 R = "R134a"
 
@@ -24,7 +25,10 @@ days = [
     # "230106 - Liquid Detection",
     # "MSS - HIH6021 - 27-02-2023",
     # "MSS-HIH6020-28-02-2023",
-    "SH-v1-10-03-2023"
+    # "SH-v1-10-03-2023"
+    # "18-04-2023 - TC -Hum - test",
+    "230517_COM10"
+
     ]
 
 
@@ -51,8 +55,10 @@ for daily in range(len(days)):
     time = df_Raw['Time'].tolist()
     Temp = np.array(df_Raw['T_suction'])
     RH = np.array(df_Raw['RH'])
-    P_Suction = np.array(df_Raw['P_suction'])
-
+    try:
+        P_Suction = np.array(df_Raw['P_suction'])
+    except:
+        print("P_suction does not exist")
     try:
         SH = np.array(df_Raw["SH"])
         SH_ref = np.array(df_Raw["SH_ref"])
@@ -63,7 +69,12 @@ for daily in range(len(days)):
         print("No data provided for OD & SH")
 
     l_Temp = list(Temp)
-    l_P_Suction = list(P_Suction)
+
+
+    try:
+        l_P_Suction = list(P_Suction)
+    except:
+        print("P_suction does not exist")
 
     if days[daily] == "230106 - Liquid Detection":
         for i in range(len(P_Suction)):
@@ -79,19 +90,25 @@ for daily in range(len(days)):
     AntioineA = 8.07131  # Valid for range 0 t0 100
     AntioineB = 1730.63  # Valid for range 0 t0 100
     AntioineC = 233.426  # Valid for range 0 t0 100
-    PSat = 10**(AntioineA-(AntioineB/(AntioineC+Temp)))
-    PPartial = ((RH/100) * PSat).tolist()
+    PSat = 10**(AntioineA-(AntioineB/(AntioineC+Temp)))  # in mmHg (760 mmHg = 101.325 kPa = 1.000 atm = normal pressure)
+    PPartial = ((RH/100) * PSat).tolist()  # in mmHg (760 mmHg = 101.325 kPa = 1.000 atm = normal pressure)
     Temp = list(Temp)
 
     Rho = []
     RhoOPPartial = []
-    for i in range(len(P_Suction)):
-        # print(l_Temp[i]+273.15)
-        # print(l_P_Suction[i] * 1e5 + 1e5)
-        # print(PSI('D', 'T', l_Temp[i]+273.15 , 'P', l_P_Suction[i] * 1e5 + 1e5, R))
-        # print(l_Temp[i])
-        Rho.append(1 / (PSI('D', 'T', l_Temp[i] + 273.15, 'P', l_P_Suction[i] * 1e5 + 1e5, R)))
-        RhoOPPartial.append(Rho[i] /PPartial[i]*100)
+
+    try:
+        for i in range(len(P_Suction)):
+            # print(l_Temp[i]+273.15)
+            # print(l_P_Suction[i] * 1e5 + 1e5)
+            # print(PSI('D', 'T', l_Temp[i]+273.15 , 'P', l_P_Suction[i] * 1e5 + 1e5, R))
+            # print(l_Temp[i])
+            Rho.append(1 / (PSI('D', 'T', l_Temp[i] + 273.15, 'P', l_P_Suction[i] * 1e5 + 1e5, R)))
+            RhoOPPartial.append(Rho[i] / PPartial[i] * 100)
+    except:
+        print("P_suction does not exist")
+
+
 
     """ Prepare var for plotting """
     ave_PPartial = mov_ave(PPartial, nMovAve)[nMovAve:]
@@ -110,13 +127,17 @@ for daily in range(len(days)):
                       )
 
     except:
-        for i in range(len(time)):
-            if i % printInterval == 0:
-                print("#",'{:>8}'.format(i),
-                      " | T :", '{:>6}'.format(str(round(Temp[i],2))),
-                      " | SH :", '{:>6}'.format(str(round(SH[i], 2))),
-                      " | ", '{:>120}'.format(str(TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R))))
-                      )
+        try:
+            for i in range(len(time)):
+                if i % printInterval == 0:
+                    print("#",'{:>8}'.format(i),
+                          " | T :", '{:>6}'.format(str(round(Temp[i],2))),
+                          " | SH :", '{:>6}'.format(str(round(SH[i], 2))),
+                          " | ", '{:>120}'.format(str(TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R))))
+                          )
+        except:
+            print("P_suction does not exist")
+
 
     try:
         label = ["Time [s]",
@@ -172,121 +193,78 @@ for daily in range(len(days)):
                      days[daily])
 
 
-        """  
-        label = ["Time [s]",
-                 "Variance of capacitance [-]",
-                 "Variance of Temp [-]",
-                 "Superheat [K]",
-                 "Actual OD [-]"
-                 ]
-        plot_4_maxed(time[nMovAve:],
-
-                        mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
-                        mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
-                        SH[nMovAve:],
-                        OD[nMovAve:],
-                        label,
-                        days[daily])
-
-        label = ["Time [s]",
-                 "Variance of capacitance [-]",
-                 "Variance of Temp [-]",
-                 ]
-        plot_2(time[nMovAve:],
-                        mov_ave(mov_var(PPartial,nVarAve),nMovAve)[nMovAve:],
-                        mov_ave(mov_var(Temp,nVarAve),nMovAve)[nMovAve:],
-                        label,
-                        days[daily])
-
-        # This is a plot for Rho over PPartial to check if there is dependancy
-        label = ["Time [s]",
-                 "Quality sensor [-]",
-                 "Move Ave Quality sensor [-]",
-                 "RhoOPPartial[nMovAve:],",
-                 "Measured Temp [degC]",
-                 "Superheat [K]",
-                 "Actual OD [-]"
-                 ]
-        plot_6_maxed(time[nMovAve:],
-                        PPartial[nMovAve:],
-                        mov_ave(PPartial,nMovAve)[nMovAve:],
-                        mov_ave(mov_var( RhoOPPartial, nVarAve), nMovAve)[nMovAve:],
-                        Temp[nMovAve:],
-                        SH[nMovAve:],
-                        OD[nMovAve:],
-                        label,
-                        days[daily]) 
-         
-        # Simillarly for corrolation plot
-                       
-        dict_dff = {
-                "PPartial": list(PPartial),
-                "Temp": list(Temp),
-                "Rho": list(Rho),
-                "RhoOverPPartia": list(RhoOPPartial),
-                }
-        dff = pd.DataFrame(dict_dff)
-        fCorrdff = plt.figure("CorrPlot Date dff " + days[daily], figsize=(19, 15))
-        plt.matshow(dff.corr(), fignum=fCorrdff.number)
-        plt.xticks(range(dff.select_dtypes(['number']).shape[1]), dff.select_dtypes(['number']).columns, fontsize=14, rotation=90)
-        plt.yticks(range(dff.select_dtypes(['number']).shape[1]), dff.select_dtypes(['number']).columns, fontsize=14)
-        cbdff = plt.colorbar()
-        cbdff.ax.tick_params(labelsize=14)
-        plt.title('Correlation Matrix', fontsize=16);
-        
-        """
-
 
     except:
-        label = ["Time [s]",
-                 "Capacitance [-]",
-                 "Move Ave Capacitance [-]",
-                 "Variance of capacitance [-]",
-                 "Measured Temp [degC]",
-                 "Variance of Temp [-]",
-                 "Superheat [K]",
+        try:
+            label = ["Time [s]",
+                     "Capacitance [-]",
+                     "Move Ave Capacitance [-]",
+                     "Variance of capacitance [-]",
+                     "Measured Temp [degC]",
+                     "Variance of Temp [-]",
+                     "Superheat [K]",
 
-                 ]
-        plot_6_maxed(time[nMovAve:],
-                     PPartial[nMovAve:],
-                     ave_PPartial,
-                     var_ave_PPartial,
-                     Temp[nMovAve:],
-                     var_ave_Temp,
-                     SH[nMovAve:],
-                     label,
-                     days[daily])
+                     ]
+            plot_6_maxed(time[nMovAve:],
+                         PPartial[nMovAve:],
+                         ave_PPartial,
+                         var_ave_PPartial,
+                         Temp[nMovAve:],
+                         var_ave_Temp,
+                         SH[nMovAve:],
+                         label,
+                         days[daily])
 
-        label = ["Time [s]",
-                 "Variance of capacitance [-]",
-                 "Measured Temp [degC]",
-                 "Variance of Temp [-]",
-                 "Superheat [K]",
+            label = ["Time [s]",
+                     "Variance of capacitance [-]",
+                     "Measured Temp [degC]",
+                     "Variance of Temp [-]",
+                     "Superheat [K]",
 
-                 ]
-        plot_4_maxed(time[nMovAve:],
-                     var_ave_PPartial,
-                     Temp[nMovAve:],
-                     var_ave_Temp,
-                     SH[nMovAve:],
-                     label,
-                     days[daily])
-        label = ["Time [s]",
-                 "Variance of capacitance [-]",
-                 "Variance of Temp [-]",
-                 ]
-        plot_2_maxed(time[nMovAve:],
-                     var_ave_PPartial,
+                     ]
+            plot_4_maxed(time[nMovAve:],
+                         var_ave_PPartial,
+                         Temp[nMovAve:],
+                         var_ave_Temp,
+                         SH[nMovAve:],
+                         label,
+                         days[daily])
+            label = ["Time [s]",
+                     "Variance of capacitance [-]",
+                     "Variance of Temp [-]",
+                     ]
+            plot_2_maxed(time[nMovAve:],
+                         var_ave_PPartial,
 
-                     var_ave_Temp,
-                     label,
-                     days[daily])
+                         var_ave_Temp,
+                         label,
+                         days[daily])
 
-        plot_2_maxed(time[nMovAve:][300:],
-                     mov_ave(var_ave_PPartial, 300)[300:],
-                     mov_ave(var_ave_Temp, 300)[300:],
-                     label,
-                     days[daily])
+            plot_2_maxed(time[nMovAve:][varnum:],
+                         mov_ave(var_ave_PPartial, varnum)[varnum:],
+                         mov_ave(var_ave_Temp, varnum)[varnum:],
+                         label,
+                         days[daily])
+        except:
+            label = ["Time [s]",
+                     "Variance of capacitance [-]",
+                     "Variance of Temp [-]",
+                     ]
+            plot_2_maxed(time[nMovAve:][varnum:],
+                         mov_ave(var_ave_PPartial, varnum)[varnum:],
+                         mov_ave(var_ave_Temp, varnum)[varnum:],
+                         label,
+                         days[daily])
+            label = ["Time [s]",
+                     "Variance of capacitance [-]",
+                     "Variance of Temp [-]",
+                     ]
+            plot_2_maxed(time[nMovAve:][varnum:],
+                         mov_ave(var_ave_PPartial, varnum)[varnum:],
+                         mov_ave(var_ave_Temp, varnum)[varnum:],
+                         label,
+                         days[daily])
+
 
 
 
@@ -297,6 +275,36 @@ for daily in range(len(days)):
     cb = plt.colorbar()
     cb.ax.tick_params(labelsize=14)
     plt.title('Correlation Matrix', fontsize=16)
+
+
+    from datetime import datetime
+
+    t0 = datetime.strptime("00:00:00.000000", "%H:%M:%S.%f")  # Time refrence for date conversion
+    tb = (t0 - datetime.strptime("00:00:00.000000", "%H:%M:%S.%f")).total_seconds()
+    clock_time=[]
+    for j in time:
+
+        clock_time.append(datetime.strptime(datetime.fromtimestamp(j + tb).strftime("%H:%M:%S"), "%H:%M:%S"))
+
+    print(clock_time)
+    print('From  ', datetime.fromtimestamp(time[0] + tb).strftime("%H:%M:%S"), '   In seconds:  ', time[0])
+    print('To    ', datetime.fromtimestamp(time[-1] + tb).strftime("%H:%M:%S"), '  In seconds:  ',time[-1])
+    import matplotlib.pyplot as plt
+    import matplotlib.dates
+
+    from datetime import datetime
+
+    x_values = clock_time[nMovAve:][varnum:]
+    y_values = mov_ave(var_ave_PPartial, varnum)[varnum:]
+
+    dates = matplotlib.dates.date2num(x_values)
+    plt.figure("CorrPlot Date    ")
+    plt.plot_date(dates, y_values)
+    plot_2_maxed(clock_time[nMovAve:][varnum:],
+                 mov_ave(var_ave_PPartial, varnum)[varnum:],
+                 mov_ave(var_ave_Temp, varnum)[varnum:],
+                 label,
+                 days[daily])
 
 plt.show()
 

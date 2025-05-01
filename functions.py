@@ -429,7 +429,7 @@ def plot_4(time, var1, var2, var3, var4, label, week):
 
     fig, host = plt.subplots()
     fig.subplots_adjust(right=0.75)
-    fig.canvas.set_window_title(str(week))
+    # fig.canvas.set_window_title(str(week))
     par1 = host.twinx()
     par2 = host.twinx()
     par3 = host.twinx()

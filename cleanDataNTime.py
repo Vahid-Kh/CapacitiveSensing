@@ -33,7 +33,8 @@ days = [
     # "MSS - HIH6021 - 27-02-2023",
     # "MSS-HIH6020-28-02-2023"
     # "230323",
-    "221011"
+    # "221011"
+    "18-04-2023 - TC -Hum - test"
 
 ]
 
@@ -99,23 +100,18 @@ for daily in range(len(days)):
     df = df.apply(pd.to_numeric, errors='coerce')
 
     """DROP NAN acting only on the COLUMNS with more than 1000 nan values"""
-    df = df.dropna(axis='columns', thresh=1000 / step_c, subset=None, inplace=False)
+    # df = df.dropna(axis='columns', thresh=round(df.shape[0] / step_c/1.021), subset=None, inplace=False)
+    df=df.dropna(axis = 1, how = 'all')
     """DROP NAN acting only on the ROWS with any nan values"""
-
+    df = df.apply(pd.to_numeric, errors='coerce')
+    df = df.dropna()
+    df =  df[~(df['Hum'] > 100)]
 
     time = df['time'].tolist()
 
     """________________________________________________________________________________"""
     cols = df.columns
-    for j in range(10):
-        for i in range(1, len(cols) - 1):
-            if i >= len(cols):
-                break
-            try:
-                if df.isnull().iloc[len(cols)-1][i]:
-                    df.drop(cols[i], axis=1, inplace=True)
-            except:
-                print("Dont know what I just did here")
+
 
     """________________________________________________________________________________"""
 
@@ -127,7 +123,17 @@ for daily in range(len(days)):
         'Discharge Pressure':                                       'P_discharge',
 
     }, inplace=True)
+    if 'Hum' in df.columns:
+        df.rename(columns={
+            'time': 'Time',
+            'Temp': 'T_suction',
+            'Hum': 'RH',
+            'Suction Pressure': 'P_suction',
+            'Discharge Pressure': 'P_discharge',
+
+        }, inplace=True)
+
     print(df.shape)
-    print(df.head)
+    print(df.head(20))
     df.to_excel("Data/Clean/" + str(renameDays[daily]) +".xlsx", index = False)
 

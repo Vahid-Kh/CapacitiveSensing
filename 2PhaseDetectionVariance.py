@@ -11,11 +11,11 @@ from TDN import TDN, PSI
 
 """ ___ CONSTANTS ___ """
 step = 1
-nMovAve = 50
-nVarAve = 50
+nMovAve = 40
+nVarAve = 30
 lowRange = 0
 highRange = 1
-printInterval = 500
+printInterval = 1000
 R = "R134a"
 
 """ Choose data from a list of available data"""
@@ -26,7 +26,10 @@ days = [
     # "MSS-HIH6020-28-02-2023",
     # "SH-v1-10-03-2023",
     # "230323",
-    "221011"
+    # "221011",
+    # "SH-03-04-2023"
+    "230512_COM10"
+
     ]
 
 
@@ -69,7 +72,7 @@ for daily in range(len(days)):
     l_Temp = list(Temp)
     l_P_Suction = list(P_Suction)
 
-    if not SH:
+    if len(SH)<2:
         for i in range(len(P_Suction)):
             try:
                 SH.append(l_Temp[i] - (PSI('T', 'Q', 1, 'P', l_P_Suction[i]*1e5+1e5, R) - 273.15))
@@ -78,7 +81,6 @@ for daily in range(len(days)):
 
 
     """ Antioine equaation """
-
     AntioineA = 8.07131  # Valid for range 0 t0 100
     AntioineB = 1730.63  # Valid for range 0 t0 100
     AntioineC = 233.426  # Valid for range 0 t0 100
@@ -99,11 +101,15 @@ for daily in range(len(days)):
     """ Prepare var for plotting """
     ave_PPartial        = mov_ave(PPartial, nMovAve)[nMovAve:]
     var_ave_PPartial    = mov_ave(mov_var(PPartial, nVarAve), nMovAve)[nMovAve:]
+
+    # var_ave_PPartial    = mov_ave(mov_var(list(RH), nVarAve), nMovAve)[nMovAve:]
     var_ave_Temp        = mov_ave(mov_var(Temp, nVarAve), nMovAve)[nMovAve:]
 
     index = []
     """ PLOT """
-    if SH != [] and SH_ref!=[]:
+    if len(SH)>2 and len(SH_ref)>2:
+        print("All data available")
+        print(df_Raw.head())
         for i in range(len(time)):
             index.append(i)
             if i % printInterval == 0:
@@ -113,6 +119,8 @@ for daily in range(len(days)):
                       " | T :", '{:>7}'.format(str(round(Temp[i],2))),
                       " | ", '{:>120}'.format(str(TDN.propl(TDN(l_P_Suction[i]*1e5, 0, l_Temp[i]+273.15, 0, 0, R))))
                       )
+
+
 
         label = ["Time [s]",
                  "Capacitance [-]",
@@ -141,7 +149,7 @@ for daily in range(len(days)):
                  "Superheat [K]",
                  "Actual OD [-]"
                  ]
-        plot_5_maxed(time[nMovAve:],
+        plot_5_maxed(index[nMovAve:],
                      var_ave_PPartial,
                      Temp[nMovAve:],
                      var_ave_Temp,
@@ -153,13 +161,13 @@ for daily in range(len(days)):
                  "Variance of capacitance [-]",
                  "Variance of Temp [-]",
                  ]
-        plot_2_maxed(time[nMovAve:],
+        plot_2_maxed(index[nMovAve:],
                      var_ave_PPartial,
                      var_ave_Temp,
                      label,
                      days[daily])
         nMovAveSmooth = 500
-        plot_2_maxed(time[nMovAve:][nMovAveSmooth:],
+        plot_2_maxed(index[nMovAve:][nMovAveSmooth:],
                      mov_ave(var_ave_PPartial, nMovAveSmooth)[nMovAveSmooth:],
                      mov_ave(var_ave_Temp, nMovAveSmooth)[nMovAveSmooth:],
                      label,
@@ -173,28 +181,26 @@ for daily in range(len(days)):
                  "Variance of Temp [-]",
                  ]
 
-        plot_5_maxed(index[nMovAve + 1:],
+        plot_5_maxed(index[nMovAve :],
                      PPartial[nMovAve:],
                      ave_PPartial,
                      var_ave_PPartial,
                      Temp[nMovAve:],
                      var_ave_Temp,
                      label,
-                     days[daily] + " test here")
+                     days[daily] + " !!!!!!!!!!test here")
 
         label = ["Time [s]",
                  "Capacitance [-]",
                  "Temp [-]",
                  ]
-        print(len(time[nMovAve:]), len(PPartial), len(Temp))
         plot_2_maxed(index,
                      PPartial,
                      Temp,
                      label,
                      days[daily])
 
-
-    if OD == []:
+    if len(OD)<2:
         print("SH controller data is missing ")
         for i in range(len(time)):
             index.append(i)
@@ -259,9 +265,9 @@ for daily in range(len(days)):
                      days[daily])
 
         label = ["Time [s]",
-                 "Capacitance [-]",
-                 "Move Ave Capacitance [-]",
-                 "Variance of capacitance [-]",
+                 "Measure of Quality [-]",
+                 "Move Ave Measure of Quality [-]",
+                 "Variance of Measure of Quality [-]",
                  "Measured Temp [degC]",
                  "Variance of Temp [-]",
                  ]
@@ -285,5 +291,12 @@ for daily in range(len(days)):
     plt.title('Correlation Matrix', fontsize=16)
 
 plt.show()
+
+
+
+
+
+
+
 
 
