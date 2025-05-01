@@ -398,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1746088066002</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <created>1746088133784</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1746088133784</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
