@@ -1,0 +1,56 @@
+#include "DHT.h"
+
+#define DHTPIN 2     
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println(F("DHT22 example!"));
+
+  dht.begin();
+}
+
+void loop() {
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+  // Variables for threshold pass
+  double humidityList[10] = {0};
+  double humidityMax = {0};
+  double humidityMin = {10000};
+  //Threshold for liquid or bubble detection should be close to 1 for most refrigerants
+  int thresholdLiquid = 1;
+  int i =0;
+  // It is designed to check every second to flag fluctuation larger than 1
+  for (i=0;i<10; i++){
+     delay(100);
+    humidityList[i] = dht.readHumidity();;
+    if (humidityList[i] > humidityMax){humidityMax=humidityList[i];};
+    if (humidityList[i] < humidityMin){humidityMin=humidityList[i];};
+
+  };
+
+
+  Serial.print(F("List test: "));
+  //Serial.print(humidityList);
+  if((humidityMax-humidityMin>thresholdLiquid)==1){    
+    Serial.println(F("Liquid detected"));
+    return;};
+
+
+  // Check if any reads failed and exit early (to try again).
+  if (isnan(temperature) || isnan(humidity)) {
+    Serial.println(F("Failed to read from DHT sensor!"));
+    return;
+  }
+
+  Serial.print(F("  Humidity: "));
+  Serial.print(humidity);
+  Serial.print(F("%  Temperature: "));
+  Serial.print(temperature);
+  Serial.println(F("°C "));
+
+  // Wait a few seconds between measurements.
+  
+}

@@ -1,0 +1,109 @@
+// This example demonstrates how to use the HIH61xx class with the Wire library. A blocking read is made to the
+// HIH61xx device. See HIH61xx_Wire_demo for a more sophisticated example which allows other tasks to run
+// whilst the HIH61xx takes its measurements.
+#include <Wire.h>
+#include <HIH61xx.h>
+#include <AsyncDelay.h>
+
+// The "hih" object must be created with a reference to the "Wire" object which represents the I2C bus it is using.
+// Note that the class for the Wire object is called "TwoWire", and must be included in the templated class name.
+HIH61xx<TwoWire> hih(Wire);
+AsyncDelay samplingInterval;
+int rh_255_pin = 3;      // LED connected to digital pin 9
+int temp_255_pin = 4;   // potentiometer connected to analog pin 3
+float rh_255 =0;          // Var defined for 0 to 5 volt in 0 to 255 scale
+float temp_255 =0;        // Var defined for 0 to 5 volt in 0 to 255 scale
+
+
+void powerUpErrorHandler(HIH61xx<TwoWire>& hih)
+{  Serial.println("Error powering up HIH61xx device");}
+
+void readErrorHandler(HIH61xx<TwoWire>& hih)
+{  Serial.println("Error reading from HIH61xx device");}
+
+#define BUFFER_SIZE 50 // size of the buffer for storing past readings
+int readings[BUFFER_SIZE]; // array to store past readings
+int index = 0; // current index in the array
+float mean = 0; // current mean of the readings
+float variance = 0; // current variance of the readings
+
+void setup() {
+  Serial.begin(9600);
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+    readings[i] = 0;
+  }
+
+#if F_CPU >= 12000000UL
+  Serial.begin(115200);
+#else
+  Serial.begin(9600);
+#endif
+
+  Wire.begin();
+
+  // Set the handlers *before* calling initialise() in case something goes wrong
+  hih.setPowerUpErrorHandler(powerUpErrorHandler);
+  hih.setReadErrorHandler(readErrorHandler);
+  hih.initialise();
+  delay(1000);//Delay to let system boot
+  Serial.println("RH[%],RH_255, PPartial[Pa]*10, Var_PPartial,  Temp[degC], Temp_255");
+  delay(1000);//Wait before accessing Sensor
+  samplingInterval.start(3000, AsyncDelay::MILLIS);
+  pinMode(rh_255_pin, OUTPUT);  // sets the pin as output
+  pinMode(temp_255_pin, OUTPUT);  // sets the pin as output
+
+}
+
+void loop() {
+  // Instruct the HIH61xx to take a measurement. This blocks until the measurement is ready.
+  hih.read();
+  float RH = hih.getRelHumidity()/100.0 ;
+  float Temp = hih.getAmbientTemp()/100.0 ;
+  rh_255=(hih.getRelHumidity() / 100.0)*2.55;
+  temp_255=((hih.getAmbientTemp() / 100.0)+40)*2.55;
+  
+  // Wait a second
+  // read the sensor value
+  float AntioineA = 8.07131;  // Valid for range 0 t0 100
+  float AntioineB = 1730.63;  // Valid for range 0 t0 100
+  float AntioineC = 233.426;  // Valid for range 0 t0 100
+  float PSat = pow(10, AntioineA-(AntioineB/(AntioineC+Temp)));
+  float sensorValue = ((RH/100) * PSat);
+
+  // update the buffer with the new reading
+  readings[index] = sensorValue;
+  index = (index + 1) % BUFFER_SIZE;
+
+  // calculate the mean of the readings
+  float sum = 0;
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+    sum += readings[i];
+  }
+  mean = sum / BUFFER_SIZE;
+
+  // calculate the variance of the readings
+  float sumOfSquares = 0;
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+    sumOfSquares += pow(readings[i] - mean, 2);
+  }
+  variance = sumOfSquares / BUFFER_SIZE;
+
+  // print the moving variance to the serial monitor
+  Serial.print(RH);
+  Serial.print(",");
+  Serial.print(rh_255);
+  Serial.print(",");
+  Serial.print(sensorValue);
+  Serial.print(",");
+  Serial.print(variance*10);
+  Serial.print(",");
+  Serial.print(Temp);
+  Serial.print(",");
+  Serial.print(temp_255);
+  Serial.println();
+  
+  analogWrite(rh_255_pin,rh_255);
+  analogWrite(temp_255_pin,temp_255);
+  // add a small delay before the next iteration
+  delay(800);
+}
