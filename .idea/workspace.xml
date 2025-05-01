@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
-      <change afterPath="$PROJECT_DIR$/ArduinoIDEToCSV.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/18-04-2023 - TC -Hum - test.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230512_COM10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230517_COM10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230517_COM10_Test.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230517_COM7_Test.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230531_COM10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230531_COM7.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230601_COM10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Clean/230601_COM7.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/18-04-2023 - TC -Hum - test.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230426_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230426_COM7.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230512_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230513_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230516_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230517_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230517_COM10_Test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230517_COM7_Test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230531_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230531_COM7.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230601_COM10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/230601_COM7.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/ReadMe.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Raw/Vahid_A22_A76_NEW_20230425_001.DATA" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OnlyT&amp;RHVariance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2PhaseDetectionVariance.py" beforeDir="false" afterPath="$PROJECT_DIR$/2PhaseDetectionVariance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2PhaseDetectionVarianceT_Evap.py" beforeDir="false" afterPath="$PROJECT_DIR$/2PhaseDetectionVarianceT_Evap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Archive/2PhaseDetectionMinMax.py" beforeDir="false" afterPath="$PROJECT_DIR$/2PhaseDetectionMinMax.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Raw/230323.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Raw/230323.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cleanDataNTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleanDataNTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cleanDataNTime_MergeSync2DF.py" beforeDir="false" afterPath="$PROJECT_DIR$/cleanDataNTime_MergeSync2DF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txtToCSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/txtToCSV.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,7 +308,28 @@
       <option name="project" value="LOCAL" />
       <updated>1679662196274</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <created>1746080647450</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1746080647450</updated>
+    </task>
+    <task id="LOCAL-00020" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <created>1746080706460</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1746080706460</updated>
+    </task>
+    <task id="LOCAL-00021" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <created>1746080949634</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1746080949634</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
