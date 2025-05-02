@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +17,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Vahid-Kh&quot;
+  }
+}</component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -27,25 +31,39 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Vahid-Kh/CapacitiveSensing.git&quot;,
+    &quot;accountId&quot;: &quot;3743775a-352f-42b8-a7d4-da55d930138c&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2KXWAEMUCkWNLjDnsV0TidaoVMB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Tech Radar Compiler" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/U375297/Git/Python/CapacitiveSensing&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\U375297\Git\Python\CapacitiveSensing" />
@@ -184,6 +202,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-PY-251.23774.444" />
+        <option value="bundled-python-sdk-890ed5b35930-d9c5bdb153f4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.23774.444" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -192,6 +218,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674121263439</updated>
+      <workItem from="1746185297181" duration="231000" />
     </task>
     <task id="LOCAL-00001" summary="Just updated ReadMe.">
       <created>1674123318689</created>
@@ -424,8 +451,19 @@
       <option name="project" value="LOCAL" />
       <updated>1746088222287</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <option name="closed" value="true" />
+      <created>1746185352501</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1746185352501</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
