@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
+    <list default="true" id="9a82ea53-ddc7-4323-a0f9-87c61b3c374c" name="Changes" comment="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,7 +43,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Energy-Systems" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Tech Radar Compiler" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
   <component name="RecentsManager">
@@ -59,6 +61,7 @@
   <component name="RunManager" selected="Python.OnlyT&amp;RHVariance">
     <configuration name="2PhaseDetection1stDerivative" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CapacitiveSensing" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -69,6 +72,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Archive/2PhaseDetection1stDerivative.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -80,6 +84,7 @@
     </configuration>
     <configuration name="2PhaseDetectionMinMax (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CapacitiveSensing" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -90,6 +95,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2PhaseDetectionMinMax.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -101,6 +107,7 @@
     </configuration>
     <configuration name="2PhaseDetectionMinMax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CapacitiveSensing" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -111,6 +118,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="C:\Users\U375297\Git\Python\CapacitiveSensing\2PhaseDetectionMinMax.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -122,6 +130,7 @@
     </configuration>
     <configuration name="ArduinoIDEToCSV" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CapacitiveSensing" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -132,6 +141,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ArduinoIDEToCSV.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -143,6 +153,7 @@
     </configuration>
     <configuration name="OnlyT&amp;RHVariance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CapacitiveSensing" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -153,6 +164,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OnlyT&amp;RHVariance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -405,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1746088133784</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added">
+      <created>1746088222287</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1746088222287</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,7 +453,8 @@
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added" />
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
     <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
-    <option name="LAST_COMMIT_MESSAGE" value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;&#10;&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
+    <MESSAGE value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
+    <option name="LAST_COMMIT_MESSAGE" value="TDN class updated, with print function variables ordered. &#10;unctions plot library updated, now can plot multiple while each scaled to min max, and all have window name taken as input.&#10;cleanDataNTime_MergeSync2DF.py added which merges 2 dataframe based on the excel tabs and merges the time, assuming clock time are correct, it matches the seconds together, it also has a function if data has seconds missing with 1 sec sample rate to get them +1 iterations increment on time so upon matching 60 sec resolution is achieved.&#10;AND&#10;print ordered neatly.&#10;&#10;Correlation plot added.&#10;All variables were renamed to remain consistent.&#10;&#10;Beautified print. :)&#10;&#10;&#10;230314 :&#10;- New plots added - plot 2 to 6 maxed.&#10;- Speed optimization - var &amp; move_ave calculated only once,&#10;- New data added&#10;- Code addapted for data with or without SH controller data, &#10;- Changes done to if conditions&#10;- New plots added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
